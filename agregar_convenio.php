@@ -35,13 +35,13 @@
                     <div class="header__navbar">
                         <ul class="list-unstyled">
                             <li class="has-sub">
-                                <a href="#">
+                                <a href="index.php">
                                     <i class="fas fa-home"></i>Inicio
                                     <span class="bot-line"></span>
                                 </a>
                             </li>
                             <li>
-                                <a href="convenios">
+                                <a href="convenios.php">
                                     <i class="fas fa-file-text"></i>
                                     <span class="bot-line"></span>Convenios</a>
                             </li>
@@ -83,7 +83,7 @@
                                 <i class="fas fa-home"></i>Inicio</a>
                         </li>
                         <li>
-                            <a href="convenios">
+                            <a href="convenios.php">
                                 <i class="fas fa-file-text"></i>Convenios</a>
                         </li>
                         <li>
@@ -110,7 +110,10 @@
                                         <li class="list-inline-item active">
                                             <a href="#">Inicio</a>
                                         </li>
-
+                                        <li class="list-inline-item seprate">
+                                            <span>/</span>
+                                        </li>
+                                        <li class="list-inline-item">Convenios</li>
                                     </ul>
                                 </div>
                                 <form class="au-form-icon--sm" action="" method="post">
@@ -128,7 +131,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h1 class="title-4">Sistema de Administración de Convenios.
+                            <h1 class="title-4">Agregar Convenio
                             </h1>
                             <hr class="line-seprate">
                         </div>
@@ -138,57 +141,52 @@
             <section class="statistic statistic2">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6 col-lg-3">
-                            <div class="statistic__item statistic__item--green">
-                                <a href="convenios.php">
-                                    <h2 class="number">50</h2>
-                                    <span class="desc">Convenios</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
+                        <div class="col-md-8">
+                            <div class="table-responsive table-responsive-data2">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Titulo</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Titulo de convenio">
+                                        </div>
                                     </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
-                            <div class="statistic__item statistic__item--orange">
-                                <a href="convenios.php">
-                                    <h2 class="number">15 </h2>
-                                    <span class="desc">Depedencias</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Elejir depedencia</label>
+                                        <div class="form-group">
+                                            <select class="form-control" id="exampleFormControlSelect1">
+                                                <option>UVY</option>
+                                                <option>CUV</option>
+                                                <option>HOTEL OCCIDENTAL</option>
+                                            </select>
+                                        </div>
+                                    </div>
 
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
-                            <div class="statistic__item statistic__item--blue">
-                                <a href="convenios.php">
-                                    <h2 class="number">8</h2>
-                                    <span class="desc">Convenios Activos</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
-                                    </div>
-                                </a>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <label for="exampleInputEmail1">Fecha de inicio</label>
 
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
-                            <div class="statistic__item statistic__item--red">
-                                <a href="convenios.php">
-                                    <h2 class="number">870 </h2>
-                                    <span class="desc">Alumnos</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
-
+                                            <input type="date" class="form-control">
+                                        </div>
+                                        <div class="col">
+                                            <label for="exampleInputEmail1">Fecha de finalización</label>
+                                            <input type="date" class="form-control">
+                                        </div>
                                     </div>
-                                </a>
+                                    <!-- <small id="emailHelp" class="form-text text-muted"></small> -->
+                                    <div class="form-group">
+                                        <br>
+                                        <label for="exampleFormControlFile1">Subir Archivo</label>
+                                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                </form>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </section>
-
             <section class="p-t-60 p-b-20">
                 <div class="container">
                     <div class="row">
@@ -202,6 +200,17 @@
             </section>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
+
     <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="vendor/jquery-3.2.1.min.js"></script>
     <script src="vendor/bootstrap-4.1/popper.min.js"></script>

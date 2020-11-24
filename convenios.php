@@ -4,9 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
-    <meta name="keywords" content="au theme template">
+    <meta name="author" content="omar">
     <title>Sistema de Administración de Convenios.</title>
 
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -159,8 +157,10 @@
 
                                 </div>
                                 <div class="table-data__tool-right">
+                                    <a href="agregar_convenio.php">
                                     <button class="au-btn au-btn-icon au-btn--green au-btn--small">
                                         <i class="zmdi zmdi-plus"></i>Agregar</button>
+                                        </a>
                                 </div>
                             </div>
                             <div class="table-responsive table-responsive-data2">
@@ -180,8 +180,8 @@
                                     <tbody>
                                         <tr class="tr-shadow">
 
-                                            <td>Convecion 1</td>
-                                            <td>UVY</td>
+                                            <td>Modelo Educación Dual con el Hotel Mahekal</td>
+                                            <td>Hotel Mahekal</td>
                                             <td>2020-12-12</td>
                                             <td>2021-12-12</td>
                                             <td>
@@ -191,68 +191,28 @@
 
                                             <td>
                                                 <div class="table-data-feature">
-                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Usar">
-                                                        <i class="zmdi zmdi-mail-send"></i>
-                                                    </button>
+                                                    <a href="usar_convenio.php">
+                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Usar">
+                                                            <i class="zmdi zmdi-mail-send"></i>
+                                                        </button>
+                                                    </a>
+                                                    <a href="editar_convenio.php">
                                                     <button class="item" data-toggle="tooltip" data-placement="top" title="Editar">
                                                         <i class="zmdi zmdi-edit"></i>
                                                     </button>
+                                                    </a>
+
                                                     <button class="item" data-toggle="tooltip" data-placement="top" title="Eliminar">
                                                         <i class="zmdi zmdi-delete"></i>
+                                                    </button>
+                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Ver Convenio">
+                                                        <i class="zmdi zmdi-assignment"></i>
                                                     </button>
 
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr class="spacer"></tr>
-                                        <tr class="tr-shadow">
-                                            <td>Convenio 2</td>
-                                            <td>CUV</td>
-                                            <td>2020-12-12</td>
-                                            <td>2021-12-12</td>
-                                            <td>
-                                                <span class="status--process">Activo</span>
-                                            </td>
-                                            <td>2</td>
-                                            <td>
-                                                <div class="table-data-feature">
-                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Usar">
-                                                        <i class="zmdi zmdi-mail-send"></i>
-                                                    </button>
-                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Editar">
-                                                        <i class="zmdi zmdi-edit"></i>
-                                                    </button>
-                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Eliminar">
-                                                        <i class="zmdi zmdi-delete"></i>
-                                                    </button>
 
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="tr-shadow">
-                                            <td>Convenio 3</td>
-                                            <td>UVY</td>
-                                            <td>2020-12-12</td>
-                                            <td>2021-12-12</td>
-                                            <td>
-                                                <span class="status--process">Activo</span>
-                                            </td>
-                                            <td>2</td>
-                                            <td>
-                                                <div class="table-data-feature">
-                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Usar">
-                                                        <i class="zmdi zmdi-mail-send"></i>
-                                                    </button>
-                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Editar">
-                                                        <i class="zmdi zmdi-edit"></i>
-                                                    </button>
-                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Eliminar">
-                                                        <i class="zmdi zmdi-delete"></i>
-                                                    </button>
-
-                                                </div>
-                                            </td>
-                                        </tr>
 
                                     </tbody>
                                 </table>

@@ -20,6 +20,16 @@
     <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
     <link href="css/theme.css" rel="stylesheet" media="all">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script>
+        $('select').selectpicker();
+    </script>
+
 </head>
 
 <body class="animsition">
@@ -35,13 +45,13 @@
                     <div class="header__navbar">
                         <ul class="list-unstyled">
                             <li class="has-sub">
-                                <a href="#">
+                                <a href="index.php">
                                     <i class="fas fa-home"></i>Inicio
                                     <span class="bot-line"></span>
                                 </a>
                             </li>
                             <li>
-                                <a href="convenios">
+                                <a href="convenios.php">
                                     <i class="fas fa-file-text"></i>
                                     <span class="bot-line"></span>Convenios</a>
                             </li>
@@ -83,7 +93,7 @@
                                 <i class="fas fa-home"></i>Inicio</a>
                         </li>
                         <li>
-                            <a href="convenios">
+                            <a href="convenios.php">
                                 <i class="fas fa-file-text"></i>Convenios</a>
                         </li>
                         <li>
@@ -110,7 +120,10 @@
                                         <li class="list-inline-item active">
                                             <a href="#">Inicio</a>
                                         </li>
-
+                                        <li class="list-inline-item seprate">
+                                            <span>/</span>
+                                        </li>
+                                        <li class="list-inline-item">Convenios</li>
                                     </ul>
                                 </div>
                                 <form class="au-form-icon--sm" action="" method="post">
@@ -128,7 +141,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h1 class="title-4">Sistema de Administración de Convenios.
+                            <h1 class="title-4 text-center">Modelo Educación Dual con el Hotel Mahekal
                             </h1>
                             <hr class="line-seprate">
                         </div>
@@ -136,59 +149,55 @@
                 </div>
             </section>
             <section class="statistic statistic2">
-                <div class="container">
+                <div class="">
                     <div class="row">
-                        <div class="col-md-6 col-lg-3">
-                            <div class="statistic__item statistic__item--green">
-                                <a href="convenios.php">
-                                    <h2 class="number">50</h2>
-                                    <span class="desc">Convenios</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
-                            <div class="statistic__item statistic__item--orange">
-                                <a href="convenios.php">
-                                    <h2 class="number">15 </h2>
-                                    <span class="desc">Depedencias</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
+                        <div class="col-md-12">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlFile1">Alumnos</label>
+                                                <br>
+                                                <select class="selectpicker form-control" multiple data-live-search="true">
+                                                    <option>Omar Alejandro Ake Bellos</option>
+                                                    <option>Martha Carmen Solis Chan</option>
+                                                    <option>Felipe Chan Chimal</option>
+                                                </select>
+                                            </div>
 
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
-                            <div class="statistic__item statistic__item--blue">
-                                <a href="convenios.php">
-                                    <h2 class="number">8</h2>
-                                    <span class="desc">Convenios Activos</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
-                                    </div>
-                                </a>
 
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
-                            <div class="statistic__item statistic__item--red">
-                                <a href="convenios.php">
-                                    <h2 class="number">870 </h2>
-                                    <span class="desc">Alumnos</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
+                                            <div class="form-row">
+                                                <div class="col">
+                                                    <label for="exampleInputEmail1">Fecha de inicio</label>
 
+                                                    <input type="date" class="form-control">
+                                                </div>
+                                                <div class="col">
+                                                    <label for="exampleInputEmail1">Fecha de finalización</label>
+                                                    <input type="date" class="form-control">
+                                                </div>
+                                            </div>
+                                            <!-- <small id="emailHelp" class="form-text text-muted"></small> -->
+                                            <div class="form-group">
+                                                <br>
+                                                <br>
+                                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                </a>
+                                    <div class="col-6">
+                                        <iframe src="https://docs.google.com/viewerng/viewer?url=http://infolab.stanford.edu/pub/papers/google.pdf&embedded=true" frameborder="0" height="400" width="100%">
+                                        </iframe>
+                                    </div>
+                                </div>
                             </div>
+
+
                         </div>
                     </div>
                 </div>
             </section>
-
             <section class="p-t-60 p-b-20">
                 <div class="container">
                     <div class="row">
@@ -202,6 +211,17 @@
             </section>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
+
     <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="vendor/jquery-3.2.1.min.js"></script>
     <script src="vendor/bootstrap-4.1/popper.min.js"></script>
