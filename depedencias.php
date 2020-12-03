@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -24,9 +24,7 @@
 
 <body class="animsition">
     <div class="page-wrapper">
-    <?php include('header.php');?>
-
-
+        <?php include('header.php');?>
         <div class="page-content--bgf7">
             <section class="au-breadcrumb2">
                 <div class="container">
@@ -59,7 +57,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h1 class="title-4">Editar Convenio
+                            <h1 class="title-4">Convenios
                             </h1>
                             <hr class="line-seprate">
                         </div>
@@ -67,59 +65,81 @@
                 </div>
             </section>
             <section class="statistic statistic2">
-                <div class="">
+                <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-8">
-                                    <form>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Titulo</label>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Titulo de convenio">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Elejir depedencia</label>
-                                        <div class="form-group">
-                                            <select class="form-control" id="exampleFormControlSelect1">
-                                                <option>UVY</option>
-                                                <option>CUV</option>
-                                                <option>HOTEL OCCIDENTAL</option>
-                                            </select>
-                                        </div>
+                            <div class="table-data__tool">
+                                <div class="table-data__tool-left">
+                                    <div class="rs-select2--light rs-select2--md">
+                                        <select class="js-select2" name="property">
+                                            <option selected="selected">Ver todos</option>
+                                            <option value="">Activos</option>
+                                            <option value="">Inactivos</option>
+                                        </select>
+                                        <div class="dropDownSelect2"></div>
                                     </div>
 
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <label for="exampleInputEmail1">Fecha de inicio</label>
 
-                                            <input type="date" class="form-control">
-                                        </div>
-                                        <div class="col">
-                                            <label for="exampleInputEmail1">Fecha de finalización</label>
-                                            <input type="date" class="form-control">
-                                        </div>
-                                    </div>
-                                    <!-- <small id="emailHelp" class="form-text text-muted"></small> -->
-                                    <div class="form-group">
-                                        <br>
-                                        <label for="exampleFormControlFile1">Subir Archivo</label>
-                                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                                    </div>
-
-                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                                </form>
-                                    </div>
-                                    <div class="col-4">
-                                    <iframe src="https://docs.google.com/viewerng/viewer?url=http://infolab.stanford.edu/pub/papers/google.pdf&embedded=true" frameborder="0" height="100%" width="100%">
-                            </iframe>
-                                    </div>
+                                </div>
+                                <div class="table-data__tool-right">
+                                    <a href="agregar_depedencia.php">
+                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                            <i class="zmdi zmdi-plus"></i>Agregar</button>
+                                    </a>
                                 </div>
                             </div>
+                            <div class="table-responsive table-responsive-data2">
+                                <table class="table table-data2">
+                                    <thead>
+                                        <tr>
 
-                          
+                                            <th>Depedencia</th>
+                                            <th>Correo</th>
+                                            <th>Telefono</th>
+                                            <th>Convenios</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="tr-shadow">
+                                            <td>Universidad de Valladolid Yucatán</td>
+                                            <td>contacto@uvy.com</td>
+                                            <td>985 100 2323</td>
+                                            <td>3</td>
+                                            <td>
+                                                <div class="table-data-feature">
+                                                    <a href="editar_depedencia.php">
+                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Editar">
+                                                            <i class="zmdi zmdi-edit"></i>
+                                                        </button>
+                                                    </a>
+                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                                                        <i class="zmdi zmdi-delete"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="tr-shadow">
+                                            <td>Centro Universitario de Valladolid</td>
+                                            <td>contacto@cuv.com</td>
+                                            <td>985 111 2323</td>
+                                            <td>3</td>
+                                            <td>
+                                                <div class="table-data-feature">
+                                                    <a href="editar_convenio.php">
+                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Editar">
+                                                            <i class="zmdi zmdi-edit"></i>
+                                                        </button>
+                                                    </a>
+                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                                                        <i class="zmdi zmdi-delete"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

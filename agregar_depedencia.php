@@ -41,7 +41,7 @@
                                         <li class="list-inline-item seprate">
                                             <span>/</span>
                                         </li>
-                                        <li class="list-inline-item">Convenios</li>
+                                        <li class="list-inline-item">Dependencia </li>
                                     </ul>
                                 </div>
                                 <form class="au-form-icon--sm" action="" method="post">
@@ -59,7 +59,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h1 class="title-4">Editar Convenio
+                            <h1 class="title-4">Agregar Dependencia
                             </h1>
                             <hr class="line-seprate">
                         </div>
@@ -67,59 +67,42 @@
                 </div>
             </section>
             <section class="statistic statistic2">
-                <div class="">
+                <div class="container">
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-8">
-                                    <form>
+                        <div class="col-md-8">
+                            <div class="table-responsive table-responsive-data2">
+                                <form>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Titulo</label>
+                                        <label for="exampleInputEmail1">Depedencia</label>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Titulo de convenio">
+                                            <input type="text" class="form-control" placeholder="Depedencia">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Elejir depedencia</label>
+                                        <label for="exampleInputEmail1">Dirección</label>
                                         <div class="form-group">
-                                            <select class="form-control" id="exampleFormControlSelect1">
-                                                <option>UVY</option>
-                                                <option>CUV</option>
-                                                <option>HOTEL OCCIDENTAL</option>
-                                            </select>
+                                            <input type="text" class="form-control" placeholder="Dirección">
                                         </div>
                                     </div>
-
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <label for="exampleInputEmail1">Fecha de inicio</label>
-
-                                            <input type="date" class="form-control">
-                                        </div>
-                                        <div class="col">
-                                            <label for="exampleInputEmail1">Fecha de finalización</label>
-                                            <input type="date" class="form-control">
-                                        </div>
-                                    </div>
-                                    <!-- <small id="emailHelp" class="form-text text-muted"></small> -->
                                     <div class="form-group">
-                                        <br>
-                                        <label for="exampleFormControlFile1">Subir Archivo</label>
-                                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                        <label for="exampleInputEmail1">Correo</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Correo de contacto">
+                                        </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Telefono</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Telefono de contacto">
+                                        </div>
+                                    </div>
+                                   
+                                   
 
-                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
                                 </form>
-                                    </div>
-                                    <div class="col-4">
-                                    <iframe src="https://docs.google.com/viewerng/viewer?url=http://infolab.stanford.edu/pub/papers/google.pdf&embedded=true" frameborder="0" height="100%" width="100%">
-                            </iframe>
-                                    </div>
-                                </div>
                             </div>
 
-                          
                         </div>
                     </div>
                 </div>
