@@ -1,24 +1,9 @@
 <?php
 include('Conexion.php');
 
-// ===================
-// ELIMINAR DEPEDENCIA
-// ===================
-
-if (isset($_GET['delete'])) {
-    $stmt = $DB_con->prepare('DELETE FROM dependencias WHERE id_dependencia = :id_dependencia');
-    $stmt->bindParam(':id_dependencia', $_GET['delete']);
-    if ($stmt->execute()) {
-        // EXITO
-        // print('<script>alert("Registro eliminado exitosamente");window.location="estados.php"</script>');
-        header('location:depedencias.php');
-    } else {
-        echo $errMSG = "Error al eliminar la información";
-    }
-}
 ?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -58,15 +43,9 @@ if (isset($_GET['delete'])) {
                                         <li class="list-inline-item seprate">
                                             <span>/</span>
                                         </li>
-                                        <li class="list-inline-item">Depedencias</li>
+                                        <li class="list-inline-item">Ciudades</li>
                                     </ul>
                                 </div>
-                                <form class="au-form-icon--sm" action="" method="post">
-                                    <input class="au-input--w300 au-input--style2" type="text" placeholder="Buscar Convenio">
-                                    <button class="au-btn--submit2" type="submit">
-                                        <i class="zmdi zmdi-search"></i>
-                                    </button>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -76,7 +55,7 @@ if (isset($_GET['delete'])) {
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h1 class="title-4">Depedencias
+                            <h1 class="title-4">Ciudades
                             </h1>
                             <hr class="line-seprate">
                         </div>
@@ -91,9 +70,9 @@ if (isset($_GET['delete'])) {
                                 <div class="table-data__tool-left">
                                 </div>
                                 <div class="table-data__tool-right">
-                                    <a href="agregar_depedencia.php">
+                                    <a href="ciudad.php">
                                         <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                            <i class="zmdi zmdi-plus"></i>Agregar</button>
+                                            <i class="zmdi zmdi-plus"></i>Agregar Ciudad</button>
                                     </a>
                                 </div>
                             </div>
@@ -102,39 +81,31 @@ if (isset($_GET['delete'])) {
                                     <thead>
                                         <tr>
 
-                                            <th>Depedencia</th>
                                             <th>Ciudad</th>
-                                            <th>Correo</th>
-                                            <th>Telefono</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $consulta = $DB_con->prepare("SELECT dependencias.*, estados.*, ciudades.* FROM ((dependencias INNER JOIN ciudades ON dependencias.ciudad_dependencia = ciudades.id_ciudades) INNER JOIN estados ON ciudades.id_estado = estados.id_estado)
-                                        ORDER BY nombre_indepedencia ASC");
+                                        $consulta = $DB_con->prepare("SELECT estados.*, ciudades.* FROM estados INNER JOIN ciudades ON estados.id_estado = ciudades.id_estado");
                                         $consulta->execute();
                                         while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
                                             echo '<tr class="tr-shadow">
-<td>' . $row->nombre_indepedencia . '</td>
-<td>' . $row->nombre_ciudad . ', ' . $row->nombre_estado . '</td>
-<td>' . $row->correo_dependencia . '</td>
-<td>' . $row->telefono_dependencia . '</td>
-<td>' . $row->numero_convenios . '</td>
+<td>' .$row->nombre_ciudad .', '. $row->nombre_estado . '</td>
 <td>
     <div class="table-data-feature">
-        <a href="editar_depedencia.php?id=' . $row->id_dependencia   . '">
+        <a href="ciudad.php?id=' . $row->id_ciudades  . '">
             <button class="item" data-toggle="tooltip" data-placement="top" title="Editar">
                 <i class="zmdi zmdi-edit"></i>
             </button>
         </a>
-            <button class="item" Onclick="eliminar' . $row->id_dependencia   . '();"  data-toggle="tooltip" data-placement="top" title="Eliminar">
+            <button class="item" Onclick="eliminar' . $row->id_ciudades  . '();"  data-toggle="tooltip" data-placement="top" title="Eliminar">
             <i class="zmdi zmdi-delete"></i>
             </button>
                                             <script type="text/javascript">
-                                                function eliminar' . $row->id_dependencia   . '() {
+                                                function eliminar' . $row->id_ciudades  . '() {
                                                     if (window.confirm("¿Desea eliminar el registro?") == true) {
-                                                        window.location = "depedencias.php?delete=' . $row->id_dependencia   . '";
+                                                        window.location = "ciudad.php?delete=' . $row->id_ciudades  . '";
                                                     }
                                                 }
                                             </script>
@@ -143,6 +114,7 @@ if (isset($_GET['delete'])) {
 </td>
 </tr>';
                                         } ?>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -155,7 +127,7 @@ if (isset($_GET['delete'])) {
                     <div class="row">
                         <div class="col-md-12">
                             <div class="copyright">
-                                <p>Sistema de Administracion de Convenios</p>
+                                <p>Copyright © Sistema de Administracion de Convenios</p>
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,28 @@
-﻿<!DOCTYPE html>
+﻿<?php
+include('Conexion.php');
+
+// ===================
+// GUARDAR DEPEDENCIA
+// ===================
+
+if (isset($_POST['guardar_depedencia'])) {
+    $stmt = $DB_con->prepare("INSERT INTO dependencias (nombre_indepedencia, correo_dependencia, telefono_dependencia, tamano_dependencia, ciudad_dependencia) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bindParam(1, $_POST['nombre_indepedencia']);
+    $stmt->bindParam(2, $_POST['correo_dependencia']);
+    $stmt->bindParam(3, $_POST['telefono_dependencia']);
+    $stmt->bindParam(4, $_POST['tamano_dependencia']);
+    $stmt->bindParam(5, $_POST['ciudad_dependencia']);
+
+    if ($stmt->execute()) {
+        // EXITO
+        print('<script>alert("Se guardo exitosamente");window.location="depedencias.php"</script>');
+    } else {
+        $errMSG = "Error al guargar la información";
+    }
+}
+
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -24,7 +48,7 @@
 
 <body class="animsition">
     <div class="page-wrapper">
-    <?php include('header.php');?>
+        <?php include('header.php'); ?>
 
 
         <div class="page-content--bgf7">
@@ -44,12 +68,6 @@
                                         <li class="list-inline-item">Dependencia </li>
                                     </ul>
                                 </div>
-                                <form class="au-form-icon--sm" action="" method="post">
-                                    <input class="au-input--w300 au-input--style2" type="text" placeholder="Buscar Convenio">
-                                    <button class="au-btn--submit2" type="submit">
-                                        <i class="zmdi zmdi-search"></i>
-                                    </button>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -71,38 +89,50 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="table-responsive table-responsive-data2">
-                                <form>
+                                <form method="POST">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Depedencia</label>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Depedencia">
+                                            <input type="text" class="form-control" name="nombre_indepedencia" placeholder="Nombre de la depedencia" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Dirección</label>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Dirección">
-                                        </div>
+                                        <label for="my-select">Ciudad</label>
+                                        <select id="my-select" class="form-control" name="ciudad_dependencia" required>
+                                            <?php
+                                            $consulta = $DB_con->prepare("SELECT estados.*, ciudades.* FROM estados INNER JOIN ciudades ON estados.id_estado = ciudades.id_estado ORDER BY nombre_ciudad ASC");
+                                            $consulta->execute();
+                                            while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
+                                                echo '<option value="' . $row->id_ciudades . '">' . $row->nombre_ciudad . ', ' . $row->nombre_estado . '</option>';
+                                            } ?>
+
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="my-select">Tamaño de la empresa</label>
+                                        <select id="my-select" class="form-control" name="tamano_dependencia" required>
+                                            <option>Micro</option>
+                                            <option>Pequeña</option>
+                                            <option>Mediana</option>
+                                            <option>Macro</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Correo</label>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Correo de contacto">
+                                            <input type="text" class="form-control" name="correo_dependencia" placeholder="Correo de contacto" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Telefono</label>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Telefono de contacto">
+                                            <input type="text" class="form-control" name="telefono_dependencia" placeholder="Telefono de contacto" required>
                                         </div>
                                     </div>
-                                   
-                                   
-
-                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                    <button type="submit" name="guardar_depedencia" class="btn btn-primary">Guardar</button>
+                                    <a href="depedencias.php"><button class="btn btn-danger" type="button">Cancelar</button></a>
                                 </form>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -112,7 +142,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="copyright">
-                                <p>Copyright © Sistema de Administracion de Convenios</p>
+                                <p>Sistema de Administracion de Convenios</p>
                             </div>
                         </div>
                     </div>

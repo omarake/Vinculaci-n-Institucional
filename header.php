@@ -14,15 +14,27 @@
                             <span class="bot-line"></span>
                         </a>
                     </li>
-                    <li>
-                        <a href="convenios.php">
-                            <i class="fas fa-file-text"></i>
-                            <span class="bot-line"></span>Convenios</a>
+                    <li class="has-sub">
+                        <a href="estados.php">
+                            <i class="fas fa-map-marker-alt	"></i>Estados
+                            <span class="bot-line"></span>
+                        </a>
+                    </li>
+                    <li class="has-sub">
+                        <a href="ciudades.php">
+                            <i class="fas fa-map-marker-alt"></i>Ciudades
+                            <span class="bot-line"></span>
+                        </a>
                     </li>
                     <li>
                         <a href="depedencias.php">
                             <i class="fas fa-flag"></i>
                             <span class="bot-line"></span>Depedencias</a>
+                    </li>
+                    <li>
+                        <a href="convenios.php">
+                            <i class="fas fa-file-text"></i>
+                            <span class="bot-line"></span>Convenios</a>
                     </li>
                     <li>
                         <a href="alumnos.php">
@@ -62,6 +74,14 @@
                 <li class="has-sub">
                     <a class="js-arrow" href="index.php">
                         <i class="fas fa-home"></i>Inicio</a>
+                </li>
+                <li class="has-sub">
+                    <a class="js-arrow" href="estados.php">
+                        <i class="fas fa-map-marker-alt	"></i>Estados</a>
+                </li>
+                <li class="has-sub">
+                    <a class="js-arrow" href="ciudades.php">
+                        <i class="fas fa-map-marker-alt	"></i>Ciudades</a>
                 </li>
                 <li>
                     <a href="convenios.php">

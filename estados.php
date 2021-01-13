@@ -1,21 +1,6 @@
 <?php
 include('Conexion.php');
 
-// ===================
-// ELIMINAR DEPEDENCIA
-// ===================
-
-if (isset($_GET['delete'])) {
-    $stmt = $DB_con->prepare('DELETE FROM dependencias WHERE id_dependencia = :id_dependencia');
-    $stmt->bindParam(':id_dependencia', $_GET['delete']);
-    if ($stmt->execute()) {
-        // EXITO
-        // print('<script>alert("Registro eliminado exitosamente");window.location="estados.php"</script>');
-        header('location:depedencias.php');
-    } else {
-        echo $errMSG = "Error al eliminar la información";
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -25,7 +10,7 @@ if (isset($_GET['delete'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="omar">
     <title>Sistema de Administración de Convenios.</title>
-
+1
     <link href="css/font-face.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
@@ -58,15 +43,9 @@ if (isset($_GET['delete'])) {
                                         <li class="list-inline-item seprate">
                                             <span>/</span>
                                         </li>
-                                        <li class="list-inline-item">Depedencias</li>
+                                        <li class="list-inline-item">Estados</li>
                                     </ul>
                                 </div>
-                                <form class="au-form-icon--sm" action="" method="post">
-                                    <input class="au-input--w300 au-input--style2" type="text" placeholder="Buscar Convenio">
-                                    <button class="au-btn--submit2" type="submit">
-                                        <i class="zmdi zmdi-search"></i>
-                                    </button>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -76,7 +55,7 @@ if (isset($_GET['delete'])) {
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h1 class="title-4">Depedencias
+                            <h1 class="title-4">Estados
                             </h1>
                             <hr class="line-seprate">
                         </div>
@@ -91,9 +70,9 @@ if (isset($_GET['delete'])) {
                                 <div class="table-data__tool-left">
                                 </div>
                                 <div class="table-data__tool-right">
-                                    <a href="agregar_depedencia.php">
+                                    <a href="estado.php">
                                         <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                            <i class="zmdi zmdi-plus"></i>Agregar</button>
+                                            <i class="zmdi zmdi-plus"></i>Agregar Estado</button>
                                     </a>
                                 </div>
                             </div>
@@ -102,39 +81,31 @@ if (isset($_GET['delete'])) {
                                     <thead>
                                         <tr>
 
-                                            <th>Depedencia</th>
-                                            <th>Ciudad</th>
-                                            <th>Correo</th>
-                                            <th>Telefono</th>
+                                            <th>Estados</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $consulta = $DB_con->prepare("SELECT dependencias.*, estados.*, ciudades.* FROM ((dependencias INNER JOIN ciudades ON dependencias.ciudad_dependencia = ciudades.id_ciudades) INNER JOIN estados ON ciudades.id_estado = estados.id_estado)
-                                        ORDER BY nombre_indepedencia ASC");
+                                        $consulta = $DB_con->prepare("SELECT * FROM estados");
                                         $consulta->execute();
                                         while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
                                             echo '<tr class="tr-shadow">
-<td>' . $row->nombre_indepedencia . '</td>
-<td>' . $row->nombre_ciudad . ', ' . $row->nombre_estado . '</td>
-<td>' . $row->correo_dependencia . '</td>
-<td>' . $row->telefono_dependencia . '</td>
-<td>' . $row->numero_convenios . '</td>
+<td>' . $row->nombre_estado . '</td>
 <td>
     <div class="table-data-feature">
-        <a href="editar_depedencia.php?id=' . $row->id_dependencia   . '">
+        <a href="estado.php?id=' . $row->id_estado . '">
             <button class="item" data-toggle="tooltip" data-placement="top" title="Editar">
                 <i class="zmdi zmdi-edit"></i>
             </button>
         </a>
-            <button class="item" Onclick="eliminar' . $row->id_dependencia   . '();"  data-toggle="tooltip" data-placement="top" title="Eliminar">
+            <button class="item" Onclick="eiminar' . $row->id_estado . '();"  data-toggle="tooltip" data-placement="top" title="Eliminar">
             <i class="zmdi zmdi-delete"></i>
             </button>
                                             <script type="text/javascript">
-                                                function eliminar' . $row->id_dependencia   . '() {
+                                                function eiminar' . $row->id_estado . '() {
                                                     if (window.confirm("¿Desea eliminar el registro?") == true) {
-                                                        window.location = "depedencias.php?delete=' . $row->id_dependencia   . '";
+                                                        window.location = "estado.php?delete=' . $row->id_estado . '";
                                                     }
                                                 }
                                             </script>
@@ -143,6 +114,7 @@ if (isset($_GET['delete'])) {
 </td>
 </tr>';
                                         } ?>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -155,7 +127,7 @@ if (isset($_GET['delete'])) {
                     <div class="row">
                         <div class="col-md-12">
                             <div class="copyright">
-                                <p>Sistema de Administracion de Convenios</p>
+                                <p>Copyright © Sistema de Administracion de Convenios</p>
                             </div>
                         </div>
                     </div>

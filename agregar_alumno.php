@@ -24,7 +24,7 @@
 
 <body class="animsition">
     <div class="page-wrapper">
-    <?php include('header.php');?>
+        <?php include('header.php'); ?>
 
 
         <div class="page-content--bgf7">
@@ -96,9 +96,70 @@
                                             <input type="text" class="form-control" placeholder="Semestre y grupo">
                                         </div>
                                     </div>
-                                   
-                                   
-
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label for="my-select">Genero</label>
+                                            <select id="my-select" class="form-control" name="">
+                                                <option>Masculino</option>
+                                                <option>Femenino</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label for="my-select">Semestre y Grupo</label>
+                                            <select id="my-select" class="form-control" name="">
+                                                <option>1° 'A'</option>
+                                                <option>1° 'B'</option>
+                                                <option>2° 'A'</option>
+                                                <option>2° 'B'</option>
+                                                <option>3° 'A'</option>
+                                                <option>3° 'B'</option>
+                                                <option>4° 'A'</option>
+                                                <option>4° 'B'</option>
+                                                <option>5° 'A'</option>
+                                                <option>5° 'B'</option>
+                                                <option>6° 'A'</option>
+                                                <option>6° 'B'</option>
+                                                <option>7° 'A'</option>
+                                                <option>7° 'B'</option>
+                                                <option>8° 'A'</option>
+                                                <option>8° 'B'</option>
+                                                <option>9° 'A'</option>
+                                                <option>9° 'B'</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="my-select">Carrera</label>
+                                        <select id="my-select" class="form-control" name="">
+                                            <option>Ingenieria Ambiental</option>
+                                            <option>Ingenieria Civil</option>
+                                            <option>Ingenieria en Sistemas Computacionales</option>
+                                            <option>Ingenieria en administración</option>
+                                            <option>Ingenieria Insdustrial</option>
+                                        </select>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <label for="my-select">¿El alumno es maya hablante?</label>
+                                        <select id="my-select" class="form-control" name="">
+                                            <option>No</option>
+                                            <option>Si</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="my-select">¿El alumno tiene alguna discapacidad?</label>
+                                        <select id="my-select" class="form-control" name="">
+                                            <option>Ninguna</option>
+                                            <option>Discapacidad física</option>
+                                            <option>Discapacidad sensorial</option>
+                                            <option>Discapacidad auditiva</option>
+                                            <option>Discapacidad visual</option>
+                                            <option>Discapacidad intelectual</option>
+                                            <option>Discapacidad mental</option>
+                                        </select>
+                                    </div>
                                     <button type="submit" class="btn btn-primary">Guardar</button>
                                 </form>
                             </div>
@@ -112,7 +173,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="copyright">
-                                <p>Copyright © Sistema de Administracion de Convenios</p>
+                                <p>Sistema de Administracion de Convenios</p>
                             </div>
                         </div>
                     </div>
