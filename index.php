@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -41,12 +41,12 @@
 
                                     </ul>
                                 </div>
-                                <form class="au-form-icon--sm" action="" method="post">
+                                <!-- <form class="au-form-icon--sm" action="" method="post">
                                     <input class="au-input--w300 au-input--style2" type="text" placeholder="Buscar Convenio">
                                     <button class="au-btn--submit2" type="submit">
                                         <i class="zmdi zmdi-search"></i>
                                     </button>
-                                </form>
+                                </form> -->
                             </div>
                         </div>
                     </div>

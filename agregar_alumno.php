@@ -1,5 +1,29 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿<?php
+include('Conexion.php');
+
+// ===================
+// GUARDAR
+// ===================
+if (isset($_POST['agregar_alumno'])) {
+    $stmt = $DB_con->prepare("INSERT INTO alumnos(nombre_alumno, genero_alumno, carrera_alumno, matricula_alumno, semestres_alumno, discapacidad_alumno, maya_alumno) VALUES (?,?,?,?,?,?,?)");
+    $stmt->bindParam(1, $_POST['nombre_alumno']);
+    $stmt->bindParam(2, $_POST['genero_alumno']);
+    $stmt->bindParam(3, $_POST['carrera_alumno']);
+    $stmt->bindParam(4, $_POST['matricula_alumno']);
+    $stmt->bindParam(5, $_POST['semestres_alumno']);
+    $stmt->bindParam(6, $_POST['discapacidad_alumno']);
+    $stmt->bindParam(7, $_POST['maya_alumno']);
+    if ($stmt->execute()) {
+        // EXITO
+        print('<script>alert("Se guardo exitosamente");window.location="alumnos.php"</script>');
+    } else {
+        $errMSG = "Error al guargar la información";
+    }
+}
+
+?>
+<!DOCTYPE html>
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -44,12 +68,12 @@
                                         <li class="list-inline-item">Agregar Alumno </li>
                                     </ul>
                                 </div>
-                                <form class="au-form-icon--sm" action="" method="post">
+                                <!-- <form class="au-form-icon--sm" action="" method="post">
                                     <input class="au-input--w300 au-input--style2" type="text" placeholder="Buscar Convenio">
                                     <button class="au-btn--submit2" type="submit">
                                         <i class="zmdi zmdi-search"></i>
                                     </button>
-                                </form>
+                                </form> -->
                             </div>
                         </div>
                     </div>
@@ -71,35 +95,23 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="table-responsive table-responsive-data2">
-                                <form>
+                                <form method="POST">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Nombre</label>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Nombre del alumno">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Carrera</label>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Carrera">
+                                            <input type="text" class="form-control" maxlength="100" name="nombre_alumno" placeholder="Nombre del alumno" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Matricula</label>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Correo de contacto">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Semestre y grupo</label>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Semestre y grupo">
+                                            <input type="number" min="1" class="form-control" placeholder="Matricula del alumno" name="matricula_alumno" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="form-group">
                                             <label for="my-select">Genero</label>
-                                            <select id="my-select" class="form-control" name="">
+                                            <select id="my-select" class="form-control" name="genero_alumno" required>
                                                 <option>Masculino</option>
                                                 <option>Femenino</option>
                                             </select>
@@ -108,7 +120,7 @@
                                     <div class="form-group">
                                         <div class="form-group">
                                             <label for="my-select">Semestre y Grupo</label>
-                                            <select id="my-select" class="form-control" name="">
+                                            <select id="my-select" class="form-control" name="semestres_alumno" required>
                                                 <option>1° 'A'</option>
                                                 <option>1° 'B'</option>
                                                 <option>2° 'A'</option>
@@ -132,25 +144,25 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="my-select">Carrera</label>
-                                        <select id="my-select" class="form-control" name="">
+                                        <select id="my-select" class="form-control" name="carrera_alumno" required>
                                             <option>Ingenieria Ambiental</option>
                                             <option>Ingenieria Civil</option>
                                             <option>Ingenieria en Sistemas Computacionales</option>
-                                            <option>Ingenieria en administración</option>
+                                            <option>Ingenieria en Administración</option>
                                             <option>Ingenieria Insdustrial</option>
                                         </select>
                                     </div>
                                     <hr>
                                     <div class="form-group">
                                         <label for="my-select">¿El alumno es maya hablante?</label>
-                                        <select id="my-select" class="form-control" name="">
+                                        <select id="my-select" class="form-control" name="maya_alumno" required>
                                             <option>No</option>
                                             <option>Si</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="my-select">¿El alumno tiene alguna discapacidad?</label>
-                                        <select id="my-select" class="form-control" name="">
+                                        <select id="my-select" class="form-control" name="discapacidad_alumno" required>
                                             <option>Ninguna</option>
                                             <option>Discapacidad física</option>
                                             <option>Discapacidad sensorial</option>
@@ -160,7 +172,8 @@
                                             <option>Discapacidad mental</option>
                                         </select>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                    <button type="submit" name="agregar_alumno" class="btn btn-primary">Guardar</button>
+                                    <a href="alumnos.php"><button class="btn btn-danger" type="button">Cancelar</button></a>
                                 </form>
                             </div>
 

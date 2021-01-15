@@ -1,5 +1,23 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿<?php
+include('Conexion.php');
+
+// ===================
+// ELIMINAR DEPEDENCIA
+// ===================
+if (isset($_GET['delete'])) {
+    $stmt = $DB_con->prepare('DELETE FROM alumnos WHERE id_alumno = :id_alumno');
+    $stmt->bindParam(':id_alumno', $_GET['delete']);
+    if ($stmt->execute()) {
+        // EXITO
+        // print('<script>alert("Registro eliminado exitosamente");window.location="estados.php"</script>');
+        header('location:alumnos.php');
+    } else {
+        echo $errMSG = "Error al eliminar la información";
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -24,7 +42,7 @@
 
 <body class="animsition">
     <div class="page-wrapper">
-    <?php include('header.php');?>
+        <?php include('header.php'); ?>
 
 
         <div class="page-content--bgf7">
@@ -44,12 +62,6 @@
                                         <li class="list-inline-item">Alumnos</li>
                                     </ul>
                                 </div>
-                                <form class="au-form-icon--sm" action="" method="post">
-                                    <input class="au-input--w300 au-input--style2" type="text" placeholder="Buscar Convenio">
-                                    <button class="au-btn--submit2" type="submit">
-                                        <i class="zmdi zmdi-search"></i>
-                                    </button>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -73,22 +85,12 @@
 
                             <div class="table-data__tool">
                                 <div class="table-data__tool-left">
-                                    <div class="rs-select2--light rs-select2--md">
-                                        <select class="js-select2" name="property">
-                                            <option selected="selected">Ver todos</option>
-                                            <option value="">Activos</option>
-                                            <option value="">Inactivos</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-
-
                                 </div>
                                 <div class="table-data__tool-right">
-                                    <a href="editar_alumno.php">
-                                    <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                        <i class="zmdi zmdi-plus"></i>Agregar</button>
-                                        </a>
+                                    <a href="agregar_alumno.php">
+                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                            <i class="zmdi zmdi-plus"></i>Agregar</button>
+                                    </a>
                                 </div>
                             </div>
                             <div class="table-responsive table-responsive-data2">
@@ -100,38 +102,43 @@
                                             <th>Carrera</th>
                                             <th>Matricula</th>
                                             <th>Semestre y Grupo</th>
-                                            <th>Status</th>
                                             <th>Participaciónes</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="tr-shadow">
+    <?php
+    $consulta = $DB_con->prepare("SELECT * FROM alumnos ORDER BY nombre_alumno ASC");
+    $consulta->execute();
+     while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
+     echo '<tr class="tr-shadow">
+<td>' . $row->nombre_alumno . '</td>
+<td>' . $row->carrera_alumno . '</td>
+<td>' . $row->matricula_alumno . '</td>
+<td>' . $row->semestres_alumno . '</td>
+<td>null</td>
+<td>
+    <div class="table-data-feature">
+        <a href="editar_alumno.php?id=' . $row->id_alumno . '">
+            <button class="item" data-toggle="tooltip" data-placement="top" title="Editar">
+                <i class="zmdi zmdi-edit"></i>
+            </button>
+        </a>
+            <button class="item" Onclick="eliminar' . $row->id_alumno . '();"  data-toggle="tooltip" data-placement="top" title="Eliminar">
+            <i class="zmdi zmdi-delete"></i>
+            </button>
+                <script type="text/javascript">
+                    function eliminar' . $row->id_alumno . '() {
+                        if (window.confirm("¿Desea eliminar el registro?") == true) {
+                                                        window.location = "alumnos.php?delete=' . $row->id_alumno . '";
+                        }
+                    }
+                </script>
 
-                                            <td>Maria Alcocer Chan Dzib</td>
-                                            <td>Ing. Ambiental</td>
-                                            <td>14500202</td>
-                                            <td>4° 'A'</td>
-                                            <td>
-                                                <span class="status--process">Activo</span>
-                                            </td>
-                                            <td>2</td>
-
-                                            <td>
-                                                <div class="table-data-feature">
-                                                    
-                                                    <a href="editar_convenio.php">
-                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Editar">
-                                                        <i class="zmdi zmdi-edit"></i>
-                                                    </button>
-                                                    </a>
-
-                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Eliminar">
-                                                        <i class="zmdi zmdi-delete"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
+    </div>
+</td>
+</tr>';
+    } ?>
 
 
                                     </tbody>

@@ -1,4 +1,28 @@
-﻿<!DOCTYPE html>
+﻿<?php
+include('Conexion.php');
+
+// ===================
+// ELIMINAR DEPEDENCIA
+// ===================
+
+// ELIMINAR TALLER
+if (isset($_GET['delete'])) {
+
+    // Selecciona pdf
+    $consulta = $DB_con->prepare('SELECT * FROM convenios WHERE id_convenio =:id_convenio');
+    $consulta->execute(array(':id_convenio' => $_GET['delete']));
+    $imgRow = $consulta->fetch(PDO::FETCH_ASSOC);
+    // elimina pdf de la carpeta
+    unlink("documentos/" . $imgRow['documento_convenio']);
+
+    // Consulta para eliminar el registro de la base de datos
+    $delete = $DB_con->prepare('DELETE FROM convenios WHERE id_convenio =:id_convenio');
+    $delete->execute(array(':id_convenio' => $_GET['delete']));
+
+    header("Location: convenios.php");
+}
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -24,7 +48,7 @@
 
 <body class="animsition">
     <div class="page-wrapper">
-    <?php include('header.php');?>
+        <?php include('header.php'); ?>
 
 
         <div class="page-content--bgf7">
@@ -44,12 +68,12 @@
                                         <li class="list-inline-item">Convenios</li>
                                     </ul>
                                 </div>
-                                <form class="au-form-icon--sm" action="" method="post">
+                                <!-- <form class="au-form-icon--sm" action="" method="post">
                                     <input class="au-input--w300 au-input--style2" type="text" placeholder="Buscar Convenio">
                                     <button class="au-btn--submit2" type="submit">
                                         <i class="zmdi zmdi-search"></i>
                                     </button>
-                                </form>
+                                </form> -->
                             </div>
                         </div>
                     </div>
@@ -73,31 +97,28 @@
 
                             <div class="table-data__tool">
                                 <div class="table-data__tool-left">
-                                    <div class="rs-select2--light rs-select2--md">
+                                    <!-- <div class="rs-select2--light rs-select2--md">
                                         <select class="js-select2" name="property">
                                             <option selected="selected">Ver todos</option>
                                             <option value="">Activos</option>
                                             <option value="">Inactivos</option>
                                         </select>
                                         <div class="dropDownSelect2"></div>
-                                    </div>
-
-
+                                    </div> -->
                                 </div>
                                 <div class="table-data__tool-right">
                                     <a href="agregar_convenio.php">
-                                    <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                        <i class="zmdi zmdi-plus"></i>Agregar</button>
-                                        </a>
+                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                            <i class="zmdi zmdi-plus"></i>Agregar</button>
+                                    </a>
                                 </div>
                             </div>
                             <div class="table-responsive table-responsive-data2">
                                 <table class="table table-data2">
                                     <thead>
                                         <tr>
-
                                             <th>Convenio</th>
-                                            <th>Depedencias</th>
+                                            <th>Depedencia</th>
                                             <th>Fecha inicio</th>
                                             <th>Fecha final</th>
                                             <th>Status</th>
@@ -106,42 +127,49 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="tr-shadow">
+                                        <?php
+                                        $consulta = $DB_con->prepare("SELECT dependencias.*, convenios.* FROM convenios INNER JOIN dependencias ON convenios.dependencia_convenio = dependencias.id_dependencia");
+                                        $consulta->execute();
+                                        while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
+                                            echo '<tr class="tr-shadow">
+<td>' . $row->nombre_convenio . '</td>
+<td>' . $row->nombre_indepedencia . '</td>
+<td>' . $row->fechaInicio_convenio . '</td>
+<td>' . $row->fechafinal_convenio . '</td>
+<td><span class="status--process">Activo</span></td>
+<td>' . $row->uso_convenios . '</td>
+<td>
+    <div class="table-data-feature">
+    <a href="usar_convenio.php?id=' . $row->id_convenio . '">
+        <button class="item" data-toggle="tooltip" data-placement="top" title="Usar">
+             <i class="fa fa-plus"></i>
+        </button>
+    </a>
+    <a href="">
+        <button class="item" data-toggle="tooltip" data-placement="top" title="Mas información">
+             <i class="fas fa-info-circle"></i>
+        </button>
+    </a>
+        <a href="editar_convenio.php?id=' . $row->id_convenio . '">
+            <button class="item" data-toggle="tooltip" data-placement="top" title="Editar">
+                <i class="zmdi zmdi-edit"></i>
+            </button>
+        </a>
+            <button class="item" Onclick="eliminar' . $row->id_convenio . '();"  data-toggle="tooltip" data-placement="top" title="Eliminar">
+            <i class="zmdi zmdi-delete"></i>
+            </button>
+                <script type="text/javascript">
+                    function eliminar' . $row->id_convenio    . '() {
+                        if (window.confirm("¿Desea eliminar el registro?") == true) {
+                                                        window.location = "convenios.php?delete=' . $row->id_convenio    . '";
+                        }
+                    }
+                </script>
 
-                                            <td>Modelo Educación Dual con el Hotel Mahekal</td>
-                                            <td>Hotel Mahekal</td>
-                                            <td>2020-12-12</td>
-                                            <td>2021-12-12</td>
-                                            <td>
-                                                <span class="status--process">Activo</span>
-                                            </td>
-                                            <td>3</td>
-
-                                            <td>
-                                                <div class="table-data-feature">
-                                                    <a href="usar_convenio.php">
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Usar">
-                                                            <i class="zmdi zmdi-mail-send"></i>
-                                                        </button>
-                                                    </a>
-                                                    <a href="editar_convenio.php">
-                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Editar">
-                                                        <i class="zmdi zmdi-edit"></i>
-                                                    </button>
-                                                    </a>
-
-                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Eliminar">
-                                                        <i class="zmdi zmdi-delete"></i>
-                                                    </button>
-                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Ver Convenio">
-                                                        <i class="zmdi zmdi-assignment"></i>
-                                                    </button>
-
-                                                </div>
-                                            </td>
-                                        </tr>
-
-
+    </div>
+</td>
+</tr>';
+                                        } ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -151,11 +179,11 @@
                 </div>
             </section>
             <section class="p-t-60 p-b-20">
-                <div class="container">
+                <div class="container">   
                     <div class="row">
                         <div class="col-md-12">
                             <div class="copyright">
-                                <p>Copyright © Sistema de Administracion de Convenios</p>
+                                <p>Sistema de Administracion de Convenios</p>
                             </div>
                         </div>
                     </div>

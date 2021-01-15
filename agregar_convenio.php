@@ -1,4 +1,49 @@
-﻿<!DOCTYPE html>
+﻿<?php
+include('Conexion.php');
+
+// ===================
+// GUARDAR DEPEDENCIA
+// ===================
+if (isset($_POST['agregar_convenio'])) {
+
+    $archivo_guardado = false;
+    $imgFile = $_FILES['user_image']['name'];
+    $tmp_dir = $_FILES['user_image']['tmp_name'];
+    $imgSize = $_FILES['user_image']['size'];
+
+    if (empty($_POST['nombre_convenio'])) {
+        $errMSG = "El nombre no puede estar vacío.";
+    } else if (empty($imgFile)) {
+        $errMSG = "Debe cargar algun archivo PDF.";
+    } else {
+        $upload_dir = 'documentos/';
+        $imgExt = strtolower(pathinfo($imgFile, PATHINFO_EXTENSION)); // get image extension
+        $valid_extensions = array('pdf'); // valid extensions
+        $userpic = rand(1000, 3000000) . "." . $imgExt;
+        if (in_array($imgExt, $valid_extensions)) {
+            if ($imgSize < 3000000) {
+                // ARCHIVO GUARDADO EN LA CARPETA
+                move_uploaded_file($tmp_dir, $upload_dir . $userpic);
+                $archivo_guardado = true;
+            } else {
+                $errMSG = "El archivo es demasiado pesado, Tamaño máximo 3Mb";
+            }
+        } else {
+            $errMSG = "Solo archivos PDF.";
+        }
+
+        if ($archivo_guardado == true) {
+            // GUARDANDO
+            $upUsuario = $DB_con->prepare("INSERT INTO convenios(nombre_convenio, dependencia_convenio, fechaInicio_convenio, fechafinal_convenio, documento_convenio) VALUES (:nombre_convenio, :dependencia_convenio, :fechaInicio_convenio, :fechafinal_convenio, :documento_convenio)");
+            $upUsuario->execute(array(':nombre_convenio' => $_POST['nombre_convenio'], ':dependencia_convenio' => $_POST['dependencia_convenio'], ':fechaInicio_convenio' => $_POST['fechaInicio_convenio'], ':fechafinal_convenio' => $_POST['fechafinal_convenio'], ':documento_convenio' => $userpic));
+
+            print('<script>alert("Información guardada exitosamente");window.location="convenios.php"</script>');
+
+        }
+    }
+}
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -24,8 +69,7 @@
 
 <body class="animsition">
     <div class="page-wrapper">
-    <?php include('header.php');?>
-
+        <?php include('header.php'); ?>
 
         <div class="page-content--bgf7">
             <section class="au-breadcrumb2">
@@ -71,43 +115,44 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="table-responsive table-responsive-data2">
-                                <form>
+                                <form method="POST" action="agregar_convenio.php"  enctype="multipart/form-data">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Titulo</label>
+                                        <label for="exampleInputEmail1">Nombre</label>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Titulo de convenio">
+                                            <input type="text" class="form-control" name="nombre_convenio" maxlength="100" placeholder="Nombre del convenio" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Elejir depedencia</label>
-                                        <div class="form-group">
-                                            <select class="form-control" id="exampleFormControlSelect1">
-                                                <option>UVY</option>
-                                                <option>CUV</option>
-                                                <option>HOTEL OCCIDENTAL</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                        <label for="my-select">Depedencia</label>
+                                        <select id="my-select" class="form-control" name="dependencia_convenio" required>
+                                            <?php
+                                            $consulta = $DB_con->prepare("SELECT * FROM dependencias ORDER BY nombre_indepedencia ASC");
+                                            $consulta->execute();
+                                            while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
+                                                echo '<option value="' . $row->id_dependencia . '">' . $row->nombre_indepedencia . '</option>';
+                                            } ?>
 
+                                        </select>
+                                    </div>
                                     <div class="form-row">
                                         <div class="col">
-                                            <label for="exampleInputEmail1">Fecha de inicio</label>
-
-                                            <input type="date" class="form-control">
+                                            <label for="f1">Fecha de inicio</label>
+                                            <input type="date" class="form-control" name="fechaInicio_convenio" required>
                                         </div>
                                         <div class="col">
-                                            <label for="exampleInputEmail1">Fecha de finalización</label>
-                                            <input type="date" class="form-control">
+                                            <label for="f2">Fecha de finalización</label>
+                                            <input type="date" class="form-control" name="fechafinal_convenio" required>
                                         </div>
                                     </div>
                                     <!-- <small id="emailHelp" class="form-text text-muted"></small> -->
                                     <div class="form-group">
                                         <br>
-                                        <label for="exampleFormControlFile1">Subir Archivo</label>
-                                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                        <label for="documento">Subir documento <small><b>(Solo archivos PDF, Maximo 3Mb)</small></p></label>
+                                        <input type="file" name="user_image" class="form-control-file" id="documento" accept="application/pdf" required>
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                    <button type="submit" name="agregar_convenio" class="btn btn-primary">Guardar</button>
+                                    <a href="convenios.php"><button class="btn btn-danger" type="button">Cancelar</button></a>
                                 </form>
                             </div>
 
@@ -120,7 +165,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="copyright">
-                                <p>Copyright © Sistema de Administracion de Convenios</p>
+                                <p>Sistema de Administracion de Convenios</p>
                             </div>
                         </div>
                     </div>

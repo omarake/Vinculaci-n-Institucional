@@ -32,14 +32,14 @@
                             <span class="bot-line"></span>Depedencias</a>
                     </li>
                     <li>
-                        <a href="convenios.php">
-                            <i class="fas fa-file-text"></i>
-                            <span class="bot-line"></span>Convenios</a>
-                    </li>
-                    <li>
                         <a href="alumnos.php">
                             <i class="fas fa-users"></i>
                             <span class="bot-line"></span>Alumnos</a>
+                    </li>
+                    <li>
+                        <a href="convenios.php">
+                            <i class="fas fa-file-text"></i>
+                            <span class="bot-line"></span>Convenios</a>
                     </li>
                 </ul>
             </div>

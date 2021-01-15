@@ -1,5 +1,23 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿<?php
+include('Conexion.php');
+
+// ===================
+// EDITAR DEPEDENCIA
+// ===================
+if (isset($_GET['id'])) {
+    $consulta = $DB_con->prepare("SELECT * FROM convenios WHERE id_convenio  = :id_convenio ");
+    $consulta->execute(array(':id_convenio' => $_GET['id']));
+    $info = $consulta->fetch(PDO::FETCH_ASSOC);
+    // echo $info['id_convenio'];
+
+    // COMPROBAMOS SI EXITE LA DEPEDENCIA ENVIADO
+    if (!isset($info['id_convenio'])) {
+        header('location:convenios.php');
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -12,7 +30,6 @@
     <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
     <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
-    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
     <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
     <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
     <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
@@ -21,20 +38,14 @@
     <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
     <link href="css/theme.css" rel="stylesheet" media="all">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script>
-        $('select').selectpicker();
-    </script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" />
 
 </head>
 
 <body class="animsition">
     <div class="page-wrapper">
-    <?php include('header.php');?>
+        <?php include('header.php'); ?>
 
 
         <div class="page-content--bgf7">
@@ -54,12 +65,12 @@
                                         <li class="list-inline-item">Convenios</li>
                                     </ul>
                                 </div>
-                                <form class="au-form-icon--sm" action="" method="post">
+                                <!-- <form class="au-form-icon--sm" action="" method="post">
                                     <input class="au-input--w300 au-input--style2" type="text" placeholder="Buscar Convenio">
                                     <button class="au-btn--submit2" type="submit">
                                         <i class="zmdi zmdi-search"></i>
                                     </button>
-                                </form>
+                                </form> -->
                             </div>
                         </div>
                     </div>
@@ -69,7 +80,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h1 class="title-4 text-center">Modelo Educación Dual con el Hotel Mahekal
+                            <h1 class="title-4 text-center"><?php echo $info['nombre_convenio']; ?>
                             </h1>
                             <hr class="line-seprate">
                         </div>
@@ -83,39 +94,40 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-6">
-                                        <form>
+                                        <form action="convenios.php" method="GET">
                                             <div class="form-group">
-                                                <label for="exampleFormControlFile1">Alumnos</label>
+                                                <label for="exampleFormControlFile1">Alumno</label>
                                                 <br>
-                                                <select class="selectpicker form-control" multiple data-live-search="true">
-                                                    <option>Omar Alejandro Ake Bellos</option>
-                                                    <option>Martha Carmen Solis Chan</option>
-                                                    <option>Felipe Chan Chimal</option>
+                                                <select class="selectpicker form-control" name="id_alumno" data-live-search="true" required>
+                                                    <?php
+                                                    $consulta = $DB_con->prepare("SELECT * FROM alumnos ORDER BY nombre_alumno ASC");
+                                                    $consulta->execute();
+                                                    while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
+                                                        echo '<option value="'.$row->id_alumno .'">'.$row->nombre_alumno.'</option>';
+                                                    } ?>
                                                 </select>
                                             </div>
-
-
                                             <div class="form-row">
                                                 <div class="col">
                                                     <label for="exampleInputEmail1">Fecha de inicio</label>
-
-                                                    <input type="date" class="form-control">
+                                                    <input type="date" class="form-control" min="<?php echo $info['fechaInicio_convenio']; ?>" max="<?php echo $info['fechafinal_convenio']; ?>" name="fechaInicio" required>
                                                 </div>
                                                 <div class="col">
                                                     <label for="exampleInputEmail1">Fecha de finalización</label>
-                                                    <input type="date" class="form-control">
+                                                    <input type="date" min="<?php echo $info['fechaInicio_convenio']; ?>" max="<?php echo $info['fechafinal_convenio']; ?>" class="form-control" name="fechaFinal" required>
                                                 </div>
                                             </div>
                                             <!-- <small id="emailHelp" class="form-text text-muted"></small> -->
                                             <div class="form-group">
                                                 <br>
                                                 <br>
-                                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                                <a href="convenios.php"><button class="btn btn-danger" type="button">Cancelar</button></a>
                                             </div>
                                         </form>
                                     </div>
                                     <div class="col-6">
-                                        <iframe src="https://docs.google.com/viewerng/viewer?url=http://infolab.stanford.edu/pub/papers/google.pdf&embedded=true" frameborder="0" height="400" width="100%">
+                                        <iframe src="documentos/<?php echo $info['documento_convenio']; ?>" frameborder="0" height="400" width="100%">
                                         </iframe>
                                     </div>
                                 </div>
@@ -131,7 +143,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="copyright">
-                                <p>Copyright © Sistema de Administracion de Convenios</p>
+                                <p>Sistema de Administracion de Convenios</p>
                             </div>
                         </div>
                     </div>
@@ -139,6 +151,10 @@
             </section>
         </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -157,7 +173,6 @@
     <script src="vendor/slick/slick.min.js">
     </script>
     <script src="vendor/wow/wow.min.js"></script>
-    <script src="vendor/animsition/animsition.min.js"></script>
     <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
     </script>
     <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
