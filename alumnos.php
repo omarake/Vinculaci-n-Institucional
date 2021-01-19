@@ -98,11 +98,11 @@ if (isset($_GET['delete'])) {
                                     <thead>
                                         <tr>
 
-                                            <th>Alummno</th>
+                                            <th>Alumno</th>
                                             <th>Carrera</th>
-                                            <th>Matricula</th>
+                                            <th>Matrícula</th>
                                             <th>Semestre y Grupo</th>
-                                            <th>Participaciónes</th>
+                                            <th>Participaciones</th>
                                             <th></th>
                                         </tr>
                                     </thead>

@@ -126,7 +126,7 @@ if (isset($_POST['guardar_depedencia'])) {
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Telefono</label>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="telefono_dependencia" placeholder="Telefono de contacto" required>
+                                            <input type="text" class="form-control" name="telefono_dependencia" placeholder="Teléfono de contacto" required>
                                         </div>
                                     </div>
                                     <button type="submit" name="guardar_depedencia" class="btn btn-primary">Guardar</button>

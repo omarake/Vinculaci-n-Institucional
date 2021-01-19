@@ -150,13 +150,13 @@ if (isset($_POST['editar_convenio'])) {
                                         <form method="POST" action="editar_convenio.php" enctype="multipart/form-data">
                                             <input type="hidden" name="id_convenio" value="<?php echo $info['id_convenio']; ?>">
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Titulo</label>
+                                                <label for="exampleInputEmail1">Título</label>
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" name="nombre_convenio" maxlength="100" placeholder="Nombre del convenio" value="<?php echo $info['nombre_convenio'] ?>" required>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Elejir depedencia</label>
+                                                <label for="exampleInputEmail1">Elegir depedencia</label>
                                                 <div class="form-group">
                                                     <select id="my-select" class="form-control" name="dependencia_convenio" required>
                                                         <?php

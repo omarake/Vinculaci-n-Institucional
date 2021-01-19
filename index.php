@@ -89,7 +89,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-3">
+                        <!-- <div class="col-md-6 col-lg-3">
                             <div class="statistic__item statistic__item--blue">
                                 <a href="convenios.php">
                                     <h2 class="number">8</h2>
@@ -100,7 +100,7 @@
                                 </a>
 
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-md-6 col-lg-3">
                             <div class="statistic__item statistic__item--red">
                                 <a href="alumnos.php">

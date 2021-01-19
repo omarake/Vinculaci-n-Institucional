@@ -103,14 +103,14 @@ if (isset($_POST['agregar_alumno'])) {
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Matricula</label>
+                                        <label for="exampleInputEmail1">Matrícula</label>
                                         <div class="form-group">
-                                            <input type="number" min="1" class="form-control" placeholder="Matricula del alumno" name="matricula_alumno" required>
+                                            <input type="number" min="1" class="form-control" placeholder="Matrícula del alumno" name="matricula_alumno" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="form-group">
-                                            <label for="my-select">Genero</label>
+                                            <label for="my-select">Género</label>
                                             <select id="my-select" class="form-control" name="genero_alumno" required>
                                                 <option>Masculino</option>
                                                 <option>Femenino</option>
@@ -145,11 +145,11 @@ if (isset($_POST['agregar_alumno'])) {
                                     <div class="form-group">
                                         <label for="my-select">Carrera</label>
                                         <select id="my-select" class="form-control" name="carrera_alumno" required>
-                                            <option>Ingenieria Ambiental</option>
-                                            <option>Ingenieria Civil</option>
-                                            <option>Ingenieria en Sistemas Computacionales</option>
-                                            <option>Ingenieria en Administración</option>
-                                            <option>Ingenieria Insdustrial</option>
+                                            <option>Ingeniería Ambiental</option>
+                                            <option>Ingeniería Civil</option>
+                                            <option>Ingeniería en Sistemas Computacionales</option>
+                                            <option>Ingeniería en Administración</option>
+                                            <option>Ingeniería Industrial</option>
                                         </select>
                                     </div>
                                     <hr>

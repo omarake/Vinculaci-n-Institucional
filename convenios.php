@@ -162,8 +162,11 @@ if (isset($_GET['delete'])) {
                     function eliminar' . $row->id_convenio    . '() {
                         if (window.confirm("¿Desea eliminar el registro?") == true) {
                                                         window.location = "convenios.php?delete=' . $row->id_convenio    . '";
+                                                        
                         }
+                       
                     }
+                    
                 </script>
 
     </div>

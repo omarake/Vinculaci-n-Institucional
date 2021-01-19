@@ -105,7 +105,7 @@ if (isset($_GET['delete'])) {
                                             <th>Depedencia</th>
                                             <th>Ciudad</th>
                                             <th>Correo</th>
-                                            <th>Telefono</th>
+                                            <th>Teléfono</th>
                                             <th></th>
                                         </tr>
                                     </thead>
