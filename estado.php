@@ -1,10 +1,5 @@
 ﻿<?php
-// session_start();
-// if (!isset($_SESSION["id_user_admin"]) || $_SESSION["id_user_admin"] == null) {
-//     print "<script>window.location='../index.php';</script>";
-// }
-
-// CONEXION
+include("mantener_session.php");
 include('Conexion.php');
 
 // ===================

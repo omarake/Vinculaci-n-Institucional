@@ -1,4 +1,5 @@
 ﻿<?php
+include("mantener_session.php");
 include('Conexion.php');
 
 // ===================
@@ -22,7 +23,6 @@ if (isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="omar">
     <title>Sistema de Administración de Convenios.</title>
 
     <link href="css/font-face.css" rel="stylesheet" media="all">

@@ -1,4 +1,5 @@
 ﻿<?php
+include("mantener_session.php");
 include('Conexion.php');
 
 // ===================
