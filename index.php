@@ -1,6 +1,8 @@
 ﻿<?php
 include("mantener_session.php");
 include("Conexion.php");
+// vinculacion@itsva.edu.mx
+// Vinculacion2021$
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +31,7 @@ include("Conexion.php");
 
 <body class="animsition">
     <div class="page-wrapper">
-    <?php include('header.php');?>
+        <?php include('header.php'); ?>
 
 
         <div class="page-content--bgf7">
@@ -70,35 +72,35 @@ include("Conexion.php");
             </section>
             <section class="statistic statistic2">
                 <div class="container">
+                    <h3 class="text-center">Reportes</h3>
+                    <br>
                     <div class="row">
-                        <div class="col-md-6 col-lg-3">
+                        <div class="col-md-6 col-lg-3" style="cursor: pointer;" data-toggle="modal" data-target="#trimestral">
                             <div class="statistic__item statistic__item--green">
-                                <a href="convenios.php">
-                                    <h2 class="number">50</h2>
-                                    <span class="desc">Convenios</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
-                                    </div>
-                                </a>
+                                <!-- <a target="_blank" href="reporte_trimestral.php?view=true"> -->
+                                <!-- <h2 class="number">50</h2> -->
+                                <span class="desc">REPORTE TRIMESTRAL</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-calendar-note"></i>
+                                </div>
+                                <!-- </a> -->
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-3">
+                        <div class="col-md-6 col-lg-3" style="cursor: pointer;" data-toggle="modal" data-target="#semestral">
                             <div class="statistic__item statistic__item--orange">
-                                <a href="depedencias.php">
-                                    <h2 class="number">15 </h2>
-                                    <span class="desc">Depedencias</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
+                                <!-- <h2 class="number">15 </h2> -->
+                                <span class="desc">REPORTE SEMESTRAL</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-calendar-note"></i>
 
-                                    </div>
-                                </a>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-3">
                             <div class="statistic__item statistic__item--blue">
-                                <a href="convenios.php">
-                                    <h2 class="number">8</h2>
-                                    <span class="desc">Convenios Activos</span>
+                                <a href="index.php">
+                                    <!-- <h2 class="number">8</h2> -->
+                                    <span class="desc">EFECTIVIDAD DE CONVENIOS</span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
@@ -108,12 +110,11 @@ include("Conexion.php");
                         </div>
                         <div class="col-md-6 col-lg-3">
                             <div class="statistic__item statistic__item--red">
-                                <a href="alumnos.php">
-                                    <h2 class="number">870 </h2>
-                                    <span class="desc">Alumnos</span>
+                                <a href="index.php">
+                                    <!-- <h2 class="number">870 </h2> -->
+                                    <span class="desc">CONVENIOS POR BOLSA DE TRABAJO</span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
-
                                     </div>
                                 </a>
                             </div>
@@ -134,6 +135,57 @@ include("Conexion.php");
                 </div>
             </section>
         </div>
+    </div>
+
+    <!-- Modal trimestral-->
+    <div class="modal fade" id="trimestral" role="dialog">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <b class="text-center">Reporte Trimestral</b>
+                    <p>Por favor elija una fecha, para mostrar los últimos 3 meses a partir de la fecha elegida. </p>
+                    <br>
+                    <form action="reporte_trimestral.php" method="GET">
+                        <input type="date" class="form-control" name="fecha" required>
+                        <br>
+                        <button type="submit" name="view" class="btn btn-primary">Aceptar</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal semestral-->
+    <div class="modal fade" id="semestral" role="dialog">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <b class="text-center">Reporte Semestral</b>
+                    <p>Por favor elija una fecha, para mostrar los últimos 6 meses a partir de la fecha elegida. </p>
+                    <br>
+                    <form action="reporte_semestral.php" method="GET">
+                        <input type="date" class="form-control" name="fecha" required>
+                        <br>
+                        <button type="submit" name="view" class="btn btn-primary">Aceptar</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     </div>
     <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="vendor/jquery-3.2.1.min.js"></script>
