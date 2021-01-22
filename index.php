@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿<?php
+include("mantener_session.php");
+include("Conexion.php");
+?>
+
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -89,7 +94,7 @@
                                 </a>
                             </div>
                         </div>
-                        <!-- <div class="col-md-6 col-lg-3">
+                        <div class="col-md-6 col-lg-3">
                             <div class="statistic__item statistic__item--blue">
                                 <a href="convenios.php">
                                     <h2 class="number">8</h2>
@@ -100,7 +105,7 @@
                                 </a>
 
                             </div>
-                        </div> -->
+                        </div>
                         <div class="col-md-6 col-lg-3">
                             <div class="statistic__item statistic__item--red">
                                 <a href="alumnos.php">
@@ -122,7 +127,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="copyright">
-                                <p>Copyright © Sistema de Administracion de Convenios</p>
+                                <p>Sistema de Administracion de Convenios</p>
                             </div>
                         </div>
                     </div>

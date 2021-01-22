@@ -35,17 +35,17 @@
                             </a>
                         </div>
                         <div class="login-form">
-                            <form action="index.php" method="post">
+                            <form action="verificar.php" method="post">
                                 <div class="form-group">
                                     <label>Usuario</label>
-                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Usuario">
+                                    <input class="au-input au-input--full" type="text" name="usuario" placeholder="Usuario">
                                 </div>
                                 <div class="form-group">
                                     <label>Contraseña</label>
                                     <input class="au-input au-input--full" type="password" name="password" placeholder="Contraseña">
                                 </div>
                                 
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Acceder</button>
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" name="login" type="submit">Acceder</button>
                             </form>
                         </div>
                     </div>

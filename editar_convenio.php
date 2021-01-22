@@ -51,16 +51,17 @@ if (isset($_POST['editar_convenio'])) {
         }
 
         if (!isset($errMSG)) {
-                $statement = $DB_con->prepare('UPDATE convenios SET nombre_convenio=:nombre_convenio ,dependencia_convenio=:dependencia_convenio, fechaInicio_convenio=:fechaInicio_convenio ,fechafinal_convenio=:fechafinal_convenio,documento_convenio=:documento_convenio WHERE id_convenio =:id_convenio');
-                $statement->execute([
-                    'nombre_convenio' => $_POST['nombre_convenio'],
-                    'dependencia_convenio' =>  $_POST['dependencia_convenio'],
-                    'fechaInicio_convenio' =>  $_POST['fechaInicio_convenio'],
-                    'fechafinal_convenio' =>  $_POST['fechafinal_convenio'],
-                    'documento_convenio' =>  $userpic,
-                    'id_convenio' =>  $_POST['id_convenio'],
-                ]);
-                print('<script>alert("Información editada exitosamente");window.location="convenios.php"</script>');
+            $statement = $DB_con->prepare('UPDATE convenios SET nombre_convenio=:nombre_convenio ,dependencia_convenio=:dependencia_convenio, fechaInicio_convenio=:fechaInicio_convenio ,fechafinal_convenio=:fechafinal_convenio,documento_convenio=:documento_convenio,concepto=:concepto WHERE id_convenio =:id_convenio');
+            $statement->execute([
+                'nombre_convenio' => $_POST['nombre_convenio'],
+                'dependencia_convenio' =>  $_POST['dependencia_convenio'],
+                'fechaInicio_convenio' =>  $_POST['fechaInicio_convenio'],
+                'fechafinal_convenio' =>  $_POST['fechafinal_convenio'],
+                'documento_convenio' =>  $userpic,
+                'concepto' =>  $_POST['concepto'],
+                'id_convenio' =>  $_POST['id_convenio'],
+            ]);
+            print('<script>alert("Información editada exitosamente");window.location="convenios.php"</script>');
 
             // tabla archivos
             // $upArchivo = $DB_con->prepare("UPDATE archivos_empresas SET titulo=:titulo,url_archivo=:url_archivo,archivo=:archivo WHERE id_user = :id_user");
@@ -183,6 +184,87 @@ if (isset($_POST['editar_convenio'])) {
                                                     <label for="f2">Fecha de finalización</label>
                                                     <input type="date" class="form-control" value="<?php echo $info['fechafinal_convenio'] ?>" name="fechafinal_convenio" required>
                                                 </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="my-select">Concepto</label>
+                                                <select id="my-select" class="form-control" name="concepto">
+                                                    <?php
+                                                    if ($info['concepto'] == 1) {
+                                                        echo '<option value="1" selected>General</option>
+<option value="2">Residencias</option>
+<option value="3">Servicio Social</option>
+<option value="4">Responsabilidad Social</option>
+<option value="5">Bolsa de Trabajo</option>
+<option value="6">Educación Dual</option>
+<option value="7">Investigación</option>
+<option value="8">Proyecto Vinculado con el sector productivo o gubernamental</option>';
+                                                    }elseif($info['concepto'] == 2){
+                                                        echo '<option value="1">General</option>
+                                                        <option value="2" selected>Residencias</option>
+                                                        <option value="3">Servicio Social</option>
+                                                        <option value="4">Responsabilidad Social</option>
+                                                        <option value="5">Bolsa de Trabajo</option>
+                                                        <option value="6">Educación Dual</option>
+                                                        <option value="7">Investigación</option>
+                                                        <option value="8">Proyecto Vinculado con el sector productivo o gubernamental</option>';
+                                                    }elseif($info['concepto'] == 3){
+                                                        echo '<option value="1">General</option>
+                                                        <option value="2">Residencias</option>
+                                                        <option value="3" selected>Servicio Social</option>
+                                                        <option value="4">Responsabilidad Social</option>
+                                                        <option value="5">Bolsa de Trabajo</option>
+                                                        <option value="6">Educación Dual</option>
+                                                        <option value="7">Investigación</option>
+                                                        <option value="8">Proyecto Vinculado con el sector productivo o gubernamental</option>';
+                                                    } elseif($info['concepto'] == 4){
+                                                        echo '<option value="1">General</option>
+                                                        <option value="2">Residencias</option>
+                                                        <option value="3">Servicio Social</option>
+                                                        <option value="4" selected>Responsabilidad Social</option>
+                                                        <option value="5">Bolsa de Trabajo</option>
+                                                        <option value="6">Educación Dual</option>
+                                                        <option value="7">Investigación</option>
+                                                        <option value="8">Proyecto Vinculado con el sector productivo o gubernamental</option>';
+                                                    }elseif($info['concepto'] == 5){
+                                                        echo '<option value="1">General</option>
+                                                        <option value="2">Residencias</option>
+                                                        <option value="3">Servicio Social</option>
+                                                        <option value="4">Responsabilidad Social</option>
+                                                        <option value="5" selected>Bolsa de Trabajo</option>
+                                                        <option value="6">Educación Dual</option>
+                                                        <option value="7">Investigación</option>
+                                                        <option value="8">Proyecto Vinculado con el sector productivo o gubernamental</option>';
+                                                    }elseif($info['concepto'] == 6){
+                                                        echo '<option value="1">General</option>
+                                                        <option value="2">Residencias</option>
+                                                        <option value="3">Servicio Social</option>
+                                                        <option value="4">Responsabilidad Social</option>
+                                                        <option value="5">Bolsa de Trabajo</option>
+                                                        <option value="6" selected>Educación Dual</option>
+                                                        <option value="7">Investigación</option>
+                                                        <option value="8">Proyecto Vinculado con el sector productivo o gubernamental</option>';
+                                                    }elseif($info['concepto'] == 7){
+                                                        echo '<option value="1">General</option>
+                                                        <option value="2">Residencias</option>
+                                                        <option value="3">Servicio Social</option>
+                                                        <option value="4">Responsabilidad Social</option>
+                                                        <option value="5">Bolsa de Trabajo</option>
+                                                        <option value="6">Educación Dual</option>
+                                                        <option value="7" selected>Investigación</option>
+                                                        <option value="8">Proyecto Vinculado con el sector productivo o gubernamental</option>';
+                                                    }elseif($info['concepto'] == 8){
+                                                        echo '<option value="1">General</option>
+                                                        <option value="2">Residencias</option>
+                                                        <option value="3">Servicio Social</option>
+                                                        <option value="4">Responsabilidad Social</option>
+                                                        <option value="5">Bolsa de Trabajo</option>
+                                                        <option value="6">Educación Dual</option>
+                                                        <option value="7">Investigación</option>
+                                                        <option value="8" selected>Proyecto Vinculado con el sector productivo o gubernamental</option>';
+                                                    }
+                                                    ?>
+
+                                                </select>
                                             </div>
                                             <!-- <small id="emailHelp" class="form-text text-muted"></small> -->
                                             <div class="form-group">

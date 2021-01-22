@@ -43,9 +43,9 @@
                     </li>
                 </ul>
             </div>
-            <a href="login.php">
+            <a href="logout.php">
             <div class="header__tool">
-                <div class="header-button-item js-item-menu">
+                <div class="header-button-item">
                         <i class="fas fa-power-off" title="Cerrar Sesión"></i>
                     </div>
                 </div>

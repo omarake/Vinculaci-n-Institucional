@@ -2,11 +2,12 @@
 include('Conexion.php');
 
 // ===================
-// GUARDAR DEPEDENCIA
+// GUARDAR CONVENIO
 // ===================
 if (isset($_POST['agregar_convenio'])) {
 
     $archivo_guardado = false;
+    $fecha_hoy = date("Y-m-d");
     $imgFile = $_FILES['user_image']['name'];
     $tmp_dir = $_FILES['user_image']['tmp_name'];
     $imgSize = $_FILES['user_image']['size'];
@@ -34,11 +35,10 @@ if (isset($_POST['agregar_convenio'])) {
 
         if ($archivo_guardado == true) {
             // GUARDANDO
-            $upUsuario = $DB_con->prepare("INSERT INTO convenios(nombre_convenio, dependencia_convenio, fechaInicio_convenio, fechafinal_convenio, documento_convenio) VALUES (:nombre_convenio, :dependencia_convenio, :fechaInicio_convenio, :fechafinal_convenio, :documento_convenio)");
-            $upUsuario->execute(array(':nombre_convenio' => $_POST['nombre_convenio'], ':dependencia_convenio' => $_POST['dependencia_convenio'], ':fechaInicio_convenio' => $_POST['fechaInicio_convenio'], ':fechafinal_convenio' => $_POST['fechafinal_convenio'], ':documento_convenio' => $userpic));
+            $upUsuario = $DB_con->prepare("INSERT INTO convenios(nombre_convenio, dependencia_convenio, fecha_registro,fechaInicio_convenio, fechafinal_convenio, documento_convenio, concepto) VALUES (:nombre_convenio, :dependencia_convenio, :fecha_registro, :fechaInicio_convenio, :fechafinal_convenio, :documento_convenio, :concepto)");
+            $upUsuario->execute(array(':nombre_convenio' => $_POST['nombre_convenio'], ':dependencia_convenio' => $_POST['dependencia_convenio'], ':fecha_registro' => $fecha_hoy, ':fechaInicio_convenio' => $_POST['fechaInicio_convenio'], ':fechafinal_convenio' => $_POST['fechafinal_convenio'], ':documento_convenio' => $userpic, ':concepto' => $_POST['concepto']));
 
             print('<script>alert("Información guardada exitosamente");window.location="convenios.php"</script>');
-
         }
     }
 }
@@ -115,7 +115,7 @@ if (isset($_POST['agregar_convenio'])) {
                     <div class="row">
                         <div class="col-md-8">
                             <div class="table-responsive table-responsive-data2">
-                                <form method="POST" action="agregar_convenio.php"  enctype="multipart/form-data">
+                                <form method="POST" action="agregar_convenio.php" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Nombre</label>
                                         <div class="form-group">
@@ -143,6 +143,19 @@ if (isset($_POST['agregar_convenio'])) {
                                             <label for="f2">Fecha de finalización</label>
                                             <input type="date" class="form-control" name="fechafinal_convenio" required>
                                         </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="my-select">Concepto</label>
+                                        <select id="my-select" class="form-control" name="concepto">
+                                            <option value="1">General</option>
+                                            <option value="2">Residencias</option>
+                                            <option value="3">Servicio Social</option>
+                                            <option value="4">Responsabilidad Social</option>
+                                            <option value="5">Bolsa de Trabajo</option>
+                                            <option value="6">Educación Dual</option>
+                                            <option value="7">Investigación</option>
+                                            <option value="8">Proyecto Vinculado con el sector productivo o gubernamental</option>
+                                        </select>
                                     </div>
                                     <!-- <small id="emailHelp" class="form-text text-muted"></small> -->
                                     <div class="form-group">
