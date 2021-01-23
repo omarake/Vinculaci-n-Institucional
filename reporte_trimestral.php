@@ -25,23 +25,23 @@ if (isset($_GET['fecha'])) { //BUSCAR CONVENIOS
     $mayaHablanteM = 0;
     $mayaHablanteF = 0;
 
-    $fisicaM =0;
-    $fisicaF =0;
+    $fisicaM = 0;
+    $fisicaF = 0;
 
-    $sensorialM =0;
-    $sensorialF =0;
+    $sensorialM = 0;
+    $sensorialF = 0;
 
-    $auditivaM =0;
-    $auditivaF =0;
+    $auditivaM = 0;
+    $auditivaF = 0;
 
-    $visualM =0;
-    $visualF =0;
+    $visualM = 0;
+    $visualF = 0;
 
-    $intelectualM =0;
-    $intelectualF =0;
+    $intelectualM = 0;
+    $intelectualF = 0;
 
-    $mentalM =0;
-    $mentalF =0;
+    $mentalM = 0;
+    $mentalF = 0;
 
 
     $infoConvenios = $DB_con->prepare("SELECT dependencias.*, convenios.* FROM convenios INNER JOIN dependencias ON convenios.dependencia_convenio = dependencias.id_dependencia");
@@ -54,8 +54,8 @@ if (isset($_GET['fecha'])) { //BUSCAR CONVENIOS
         // COMPARAR EL RANGO DE FECHAS
         if ((($fecha_convenio_inicio >= $mes_inicio) && ($fecha_convenio_inicio <= $mes_final)) || (($fecha_convenio_final >= $mes_inicio) && ($fecha_convenio_final <= $mes_final))) {
 
-// echo $rowLista->nombre_convenio;
-// echo '<br>';
+            // echo $rowLista->nombre_convenio;
+            // echo '<br>';
 
             // DEPEDENCIAS + CONVENIOS
             $infoDepedencias = $DB_con->prepare("SELECT * FROM convenios INNER JOIN dependencias ON convenios.id_convenio = dependencias.id_dependencia WHERE convenios.id_convenio = :id_convenio");
@@ -84,32 +84,32 @@ if (isset($_GET['fecha'])) { //BUSCAR CONVENIOS
 
                         if ($rowAlumnos->discapacidad_alumno == 'Discapacidad física') {
                             $fisicaM++;
-                        }elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad sensorial') {
+                        } elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad sensorial') {
                             $sensorialM++;
-                        }elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad auditiva') {
+                        } elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad auditiva') {
                             $auditivaM++;
-                        }elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad visual') {
+                        } elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad visual') {
                             $visualM++;
-                        }elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad intelectual') {
+                        } elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad intelectual') {
                             $intelectualM++;
-                        }elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad mental') {
+                        } elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad mental') {
                             $mentalM++;
                         }
-                    }elseif ($rowAlumnos->genero_alumno == 'Femenino') {
+                    } elseif ($rowAlumnos->genero_alumno == 'Femenino') {
                         if ($rowAlumnos->maya_alumno == 'Si') {
                             $mayaHablanteF++;
                         }
                         if ($rowAlumnos->discapacidad_alumno == 'Discapacidad física') {
                             $fisicaF++;
-                        }elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad sensorial') {
+                        } elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad sensorial') {
                             $sensorialF++;
-                        }elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad auditiva') {
+                        } elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad auditiva') {
                             $auditivaF++;
-                        }elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad visual') {
+                        } elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad visual') {
                             $visualF++;
-                        }elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad intelectual') {
+                        } elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad intelectual') {
                             $intelectualF++;
-                        }elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad mental') {
+                        } elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad mental') {
                             $mentalF++;
                         }
                     }
@@ -298,12 +298,12 @@ if (isset($_GET['fecha'])) { //BUSCAR CONVENIOS
         </tr>
         <tr>
             <th>Mujeres</th>
-            <th><?php echo $fisicaF;?></th>
-            <th><?php echo $sensorialF;?></th>
-            <th><?php echo $auditivaF;?></th>
-            <th><?php echo $visualF;?></th>
-            <th><?php echo $intelectualF;?></th>
-            <th><?php echo $mentalF;?></th>
+            <th><?php echo $fisicaF; ?></th>
+            <th><?php echo $sensorialF; ?></th>
+            <th><?php echo $auditivaF; ?></th>
+            <th><?php echo $visualF; ?></th>
+            <th><?php echo $intelectualF; ?></th>
+            <th><?php echo $mentalF; ?></th>
             <th><?php echo $mayaHablanteF; ?></th>
         </tr>
     </table>

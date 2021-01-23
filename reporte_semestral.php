@@ -3,9 +3,125 @@ include("mantener_session.php");
 include("Conexion.php");
 
 if (isset($_GET['fecha'])) { //BUSCAR CONVENIOS
-    $infoConvenios = $DB_con->prepare("SELECT dependencias.*, convenios.* FROM convenios INNER JOIN dependencias ON convenios.dependencia_convenio = dependencias.id_dependencia");
-    $infoConvenios->execute();
- 
+    // RANGO DE FECHA A COMPARAR
+    $fecha = date_create($_GET['fecha']);
+    date_add($fecha, date_interval_create_from_date_string("-6 months"));
+
+    $mes_i = date_format($fecha, "Y-m-d"); //mes inicio
+    $mes_f = $_GET['fecha']; // mes final
+
+    // FORMATEAR FECHAS 
+    $mes_inicio = strtotime($mes_i, time());
+    $mes_final = strtotime($mes_f);
+
+    // VARIBLES
+    $contadorConvenios = 0;
+    $general = 0;
+    $residencia = 0;
+    $servicio = 0;
+    $responsabilidad = 0;
+    $bolsa = 0;
+    $dual = 0;
+    $investigacion = 0;
+    $proyecto = 0;
+
+    $mayaHablanteM = 0;
+    $mayaHablanteF = 0;
+
+    $fisicaM = 0;
+    $fisicaF = 0;
+
+    $sensorialM = 0;
+    $sensorialF = 0;
+
+    $auditivaM = 0;
+    $auditivaF = 0;
+
+    $visualM = 0;
+    $visualF = 0;
+
+    $intelectualM = 0;
+    $intelectualF = 0;
+
+    $mentalM = 0;
+    $mentalF = 0;
+
+    $beneficiarios = 0;
+
+    $infoConvenios = $DB_con->prepare("SELECT dependencias.*, convenios.* FROM convenios INNER JOIN dependencias ON convenios.dependencia_convenio = dependencias.id_dependencia WHERE convenios.tipo=:tipo");
+    $infoConvenios->execute(array('tipo' => 1));
+    // MOSTAR LISTA
+    while ($rowLista = $infoConvenios->fetch(PDO::FETCH_OBJ)) {
+        // FECHAS DEL CONVENIO
+        $fecha_convenio_inicio = strtotime($rowLista->fechaInicio_convenio);
+        $fecha_convenio_final = strtotime($rowLista->fechafinal_convenio);
+
+        // COMPARAR EL RANGO DE FECHAS
+        if ((($fecha_convenio_inicio >= $mes_inicio) && ($fecha_convenio_inicio <= $mes_final)) || (($fecha_convenio_final >= $mes_inicio) && ($fecha_convenio_final <= $mes_final))) {
+            $contadorConvenios++;
+            if ($rowLista->concepto == 1) {
+                $general++;
+            } elseif ($rowLista->concepto == 2) {
+                $residencia++;
+            } elseif ($rowLista->concepto == 3) {
+                $servicio++;
+            } elseif ($rowLista->concepto == 4) {
+                $residencia++;
+            } elseif ($rowLista->concepto == 5) {
+                $bolsa++;
+            } elseif ($rowLista->concepto == 6) {
+                $dual++;
+            } elseif ($rowLista->concepto == 7) {
+                $investigacion++;
+            } elseif ($rowLista->concepto == 8) {
+                $proyecto++;
+            }
+
+            // ALUMNOS DE ESTE CONVENIO
+            $infoAlumnos = $DB_con->prepare("SELECT alumnos.*, convenios.*, convenio_alumno.* FROM ((convenio_alumno INNER JOIN alumnos ON convenio_alumno.id_alumno = alumnos.id_alumno) INNER JOIN convenios ON convenios.id_convenio = convenio_alumno.id_convenio) WHERE convenios.id_convenio = :id_convenio");
+            $infoAlumnos->execute(array('id_convenio' => $rowLista->id_convenio));
+            while ($rowAlumnos = $infoAlumnos->fetch(PDO::FETCH_OBJ)) {
+                $beneficiarios++;
+
+                if ($rowAlumnos->genero_alumno == 'Masculino') {
+                    if ($rowAlumnos->maya_alumno == 'Si') {
+                        $mayaHablanteM++;
+                    }
+
+                    if ($rowAlumnos->discapacidad_alumno == 'Discapacidad física') {
+                        $fisicaM++;
+                    } elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad sensorial') {
+                        $sensorialM++;
+                    } elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad auditiva') {
+                        $auditivaM++;
+                    } elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad visual') {
+                        $visualM++;
+                    } elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad intelectual') {
+                        $intelectualM++;
+                    } elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad mental') {
+                        $mentalM++;
+                    }
+                } elseif ($rowAlumnos->genero_alumno == 'Femenino') {
+                    if ($rowAlumnos->maya_alumno == 'Si') {
+                        $mayaHablanteF++;
+                    }
+                    if ($rowAlumnos->discapacidad_alumno == 'Discapacidad física') {
+                        $fisicaF++;
+                    } elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad sensorial') {
+                        $sensorialF++;
+                    } elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad auditiva') {
+                        $auditivaF++;
+                    } elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad visual') {
+                        $visualF++;
+                    } elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad intelectual') {
+                        $intelectualF++;
+                    } elseif ($rowAlumnos->discapacidad_alumno == 'Discapacidad mental') {
+                        $mentalF++;
+                    }
+                }
+            }
+        }
+    }
 } else {
     print "<script>window.location='index.php';</script>";
 }
@@ -92,7 +208,7 @@ if (isset($_GET['fecha'])) { //BUSCAR CONVENIOS
 </head>
 
 <body>
-    
+
     <div class="control-bar">
         <div class="container">
             <div class="row">
@@ -124,10 +240,11 @@ if (isset($_GET['fecha'])) { //BUSCAR CONVENIOS
         <div class="text-center">
             <h1>Reporte Semestral
                 <br>
-                <small>Del <?php 
-                $fecha = date_create($_GET['fecha']);
-date_add($fecha, date_interval_create_from_date_string("-6 months"));
-echo date_format($fecha,"d-m-Y"). ' al ' . $_GET['fecha']; ?></small>
+                <small>Del <?php
+                            $fecha_get = $_GET['fecha'];
+                            $fecha = date_create($_GET['fecha']);
+                            date_add($fecha, date_interval_create_from_date_string("-6 months"));
+                            echo date_format($fecha, "d/m/Y") . ' al ' . date("d/m/Y", strtotime($fecha_get));  ?></small>
             </h1>
         </div>
     </div>
@@ -137,29 +254,79 @@ echo date_format($fecha,"d-m-Y"). ' al ' . $_GET['fecha']; ?></small>
 
     <table id="customers">
         <tr>
-            <th>Convenio</th>
-            <th>Depedencia</th>
-            <th>Fecha</th>
-            <th>Status</th>
-            <th>Usos</th>
+            <th colspan="7">TOTAL DE CONVENIOS FIRMADOS POR CONCEPTO: <?php echo $contadorConvenios; ?></th>
         </tr>
-
-
-        <?php
-        // MOSTAR LISTA
-
-        while ($rowLista = $infoConvenios->fetch(PDO::FETCH_OBJ)) {
-        ?>
-            <tr>
-                <td> <?php echo $rowLista->nombre_convenio; ?> </td>
-                <td> <?php echo $rowLista->nombre_indepedencia; ?> </td>
-                <td> <?php echo $rowLista->fechaInicio_convenio; ?> </td>
-                <td>Activo</td>
-                <td>5</td>
-            </tr>
-        <?php }  ?>
+        <tr>
+            <th>General</th>
+            <th>Residencias</th>
+            <th>Servicio Social</th>
+            <th>Responsabilidad Social</th>
+            <th>Bolsa de Trabajo</th>
+            <th>Educación Dual</th>
+            <th>Proyecto Vinculado con el sector productivo o gubernamentaln</th>
+        </tr>
+        <tr>
+            <th><?php echo $general; ?></th>
+            <th><?php echo $residencia; ?></th>
+            <th><?php echo $servicio; ?></th>
+            <th><?php echo $responsabilidad; ?></th>
+            <th><?php echo $bolsa; ?></th>
+            <th><?php echo $dual; ?></th>
+            <th><?php echo $proyecto; ?></th>
+        </tr>
     </table>
-    
+    <br>
+    <br>
+    <table id="customers">
+        <tr>
+            <th colspan="8">TOTAL DE BENEFICIARIOS: <?php echo $beneficiarios; ?></th>
+        </tr>
+        <tr>
+            <th></th>
+            <th>Física</th>
+            <th>Sensorial</th>
+            <th>Auditiva</th>
+            <th>Visual</th>
+            <th>Intelectual</th>
+            <th>Mental</th>
+            <th>Maya Hablante</th>
+        </tr>
+        <tr>
+            <th>Hombres</th>
+            <th><?php echo $fisicaM; ?></th>
+            <th><?php echo $sensorialM; ?></th>
+            <th><?php echo $auditivaM; ?></th>
+            <th><?php echo $visualM; ?></th>
+            <th><?php echo $intelectualM; ?></th>
+            <th><?php echo $mentalM; ?></th>
+            <th><?php echo $mayaHablanteM; ?></th>
+        </tr>
+        <tr>
+            <th>Mujeres</th>
+            <th><?php echo $fisicaF; ?></th>
+            <th><?php echo $sensorialF; ?></th>
+            <th><?php echo $auditivaF; ?></th>
+            <th><?php echo $visualF; ?></th>
+            <th><?php echo $intelectualF; ?></th>
+            <th><?php echo $mentalF; ?></th>
+            <th><?php echo $mayaHablanteF; ?></th>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="text-center" style="font-size: 12px; font-family:Century Gothic;">
+            <p>___________________________________</p>
+            <p contenteditable>Lic. Rubí Gutiérrez Terrones.</p>
+            <p contenteditable>Jefa del Departamento de Vinculación Institucional.</p>
+            <br>
+        </div>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script>
         window.jQuery || document.write('<script src="assets/bower_components/jquery/dist/jquery.min.js"><\/script>')
