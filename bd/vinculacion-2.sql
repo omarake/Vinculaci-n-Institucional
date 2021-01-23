@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Jan 22, 2021 at 08:56 AM
--- Server version: 5.7.26
--- PHP Version: 7.2.18
+-- Servidor: 127.0.0.1:3306
+-- Tiempo de generación: 23-01-2021 a las 16:18:18
+-- Versión del servidor: 5.7.31
+-- Versión de PHP: 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `vinculacion`
+-- Base de datos: `vinculacion`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `alumnos`
+-- Estructura de tabla para la tabla `alumnos`
 --
 
 DROP TABLE IF EXISTS `alumnos`;
@@ -42,18 +41,18 @@ CREATE TABLE IF NOT EXISTS `alumnos` (
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Dumping data for table `alumnos`
+-- Volcado de datos para la tabla `alumnos`
 --
 
 INSERT INTO `alumnos` (`id_alumno`, `nombre_alumno`, `genero_alumno`, `carrera_alumno`, `matricula_alumno`, `semestres_alumno`, `discapacidad_alumno`, `maya_alumno`) VALUES
-(1, 'Jesus Alberto Medina Dzib', 'Masculino', 'Ingenieria Civil', 16070014, '9Â° \'A\'', 'Discapacidad visual', 'No'),
-(2, 'Karina Chiguil Euan', 'Femenino', 'Ingenieria en Sistemas Computacionales', 16070014, '9Â° \'A\'', 'Ninguna', 'No'),
-(4, 'Omar Alejandro Ake Bellos', 'Femenino', 'Ingenieria Ambiental', 16070024, '9Â° \'A\'', 'Ninguna', 'No');
+(1, 'Jesus Alberto Medina Dzib', 'Masculino', 'Ingenieria Civil', 16070014, '9Â° \'A\'', 'Discapacidad fÃ­sica', 'No'),
+(2, 'Karina Chiguil Euan', 'Femenino', 'Ingenieria en Sistemas Computacionales', 16070014, '9Â° \'A\'', 'Discapacidad sensorial', 'Si'),
+(4, 'Omar Alejandro Ake Bellos', 'Femenino', 'Ingenieria Ambiental', 16070024, '9Â° \'A\'', 'Discapacidad auditiva', 'Si');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ciudades`
+-- Estructura de tabla para la tabla `ciudades`
 --
 
 DROP TABLE IF EXISTS `ciudades`;
@@ -65,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `ciudades` (
 ) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Dumping data for table `ciudades`
+-- Volcado de datos para la tabla `ciudades`
 --
 
 INSERT INTO `ciudades` (`id_ciudades`, `nombre_ciudad`, `id_estado`) VALUES
@@ -77,7 +76,7 @@ INSERT INTO `ciudades` (`id_ciudades`, `nombre_ciudad`, `id_estado`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `convenios`
+-- Estructura de tabla para la tabla `convenios`
 --
 
 DROP TABLE IF EXISTS `convenios`;
@@ -90,22 +89,24 @@ CREATE TABLE IF NOT EXISTS `convenios` (
   `fechafinal_convenio` text COLLATE latin1_general_ci NOT NULL,
   `documento_convenio` text COLLATE latin1_general_ci NOT NULL,
   `concepto` text COLLATE latin1_general_ci NOT NULL,
+  `tipo` text COLLATE latin1_general_ci NOT NULL,
   `uso_convenios` int(11) DEFAULT '0',
   PRIMARY KEY (`id_convenio`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Dumping data for table `convenios`
+-- Volcado de datos para la tabla `convenios`
 --
 
-INSERT INTO `convenios` (`id_convenio`, `nombre_convenio`, `dependencia_convenio`, `fecha_registro`, `fechaInicio_convenio`, `fechafinal_convenio`, `documento_convenio`, `concepto`, `uso_convenios`) VALUES
-(3, 'Modelo EducaciÃ³n Dual con el Hotel Mahekal', '8', '2021-01-22', '2021-01-13', '2021-03-30', '639393.pdf', '1', 0),
-(4, 'Residencia para el Ã¡rea de informÃ¡tica ', '7', '2021-01-22', '2021-01-15', '2021-04-15', '1142458.pdf', '6', 0);
+INSERT INTO `convenios` (`id_convenio`, `nombre_convenio`, `dependencia_convenio`, `fecha_registro`, `fechaInicio_convenio`, `fechafinal_convenio`, `documento_convenio`, `concepto`, `tipo`, `uso_convenios`) VALUES
+(3, 'Modelo EducaciÃ³n Dual con el Hotel Mahekal', '8', '2021-01-22', '2021-01-01', '2021-12-31', '639393.pdf', '1', '1', 0),
+(4, 'Residencia para el Ã¡rea de informÃ¡tica ', '7', '2021-01-22', '2021-01-01', '2021-07-31', '1142458.pdf', '6', '1', 0),
+(6, 'Modelo EducaciÃ³n Dual con el Hotel Mahekal', '6', '2021-01-22', '2021-01-01', '2021-07-31', '1711447.pdf', '5', '2', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `convenio_alumno`
+-- Estructura de tabla para la tabla `convenio_alumno`
 --
 
 DROP TABLE IF EXISTS `convenio_alumno`;
@@ -113,13 +114,29 @@ CREATE TABLE IF NOT EXISTS `convenio_alumno` (
   `id_convenio_alumno` int(11) NOT NULL AUTO_INCREMENT,
   `id_convenio` int(11) NOT NULL,
   `id_alumno` int(11) NOT NULL,
+  `fecha_inicio` text NOT NULL,
+  `fecha_final` text NOT NULL,
+  `producto` text NOT NULL,
+  `evidencia` text NOT NULL,
   PRIMARY KEY (`id_convenio_alumno`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `convenio_alumno`
+--
+
+INSERT INTO `convenio_alumno` (`id_convenio_alumno`, `id_convenio`, `id_alumno`, `fecha_inicio`, `fecha_final`, `producto`, `evidencia`) VALUES
+(1, 3, 1, '2021-01-28', '2021-02-01', 'a', 'a'),
+(2, 3, 4, '2021-01-29', '2021-01-30', 'producto', 'evidencia'),
+(3, 6, 2, '2021-02-05', '2021-02-02', 'a', 'a'),
+(4, 3, 1, '2021-01-27', '2021-01-28', 'el alumno entregara un reporte con la finalidad de ', 'el alumno entregara un reporte con la finalidad de '),
+(5, 6, 1, '2021-01-30', '2021-02-06', 'as', 'as'),
+(6, 6, 4, '2021-01-30', '2021-02-28', 'a', 'a');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dependencias`
+-- Estructura de tabla para la tabla `dependencias`
 --
 
 DROP TABLE IF EXISTS `dependencias`;
@@ -132,22 +149,23 @@ CREATE TABLE IF NOT EXISTS `dependencias` (
   `ciudad_dependencia` text COLLATE latin1_general_ci,
   `numero_convenios` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_dependencia`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Dumping data for table `dependencias`
+-- Volcado de datos para la tabla `dependencias`
 --
 
 INSERT INTO `dependencias` (`id_dependencia`, `nombre_indepedencia`, `correo_dependencia`, `telefono_dependencia`, `tamano_dependencia`, `ciudad_dependencia`, `numero_convenios`) VALUES
-(9, 'Allegro Cozumel', 'contacto@allegro.com', '9847565252', 'Macro', '1', NULL),
-(6, 'CONALEP', 'contacto@conalep.com', '9851001010', 'Macro', '2', NULL),
-(7, 'Universidad de Valladolid YucatÃ¡n', 'contacto@uvy.com', '9851001010', 'Mediana', '2', NULL),
-(8, 'Hotel Mahekal', 'contacto@mahekal.com', '9841665050', 'Mediana', '7', NULL);
+(9, 'Allegro Cozumel', 'contacto@allegro.com', '9847565252', '1', '1', NULL),
+(6, 'CONALEP', 'contacto@conalep.com', '9851001010', '2', '2', NULL),
+(7, 'Universidad de Valladolid YucatÃ¡n', 'contacto@uvy.com', '9851001010', '3', '2', NULL),
+(8, 'Hotel Mahekal', 'contacto@mahekal.com', '9841665050', '4', '7', NULL),
+(10, 'UVY', 'contacto@uvy.com', '98510101020', '4', '2', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `estados`
+-- Estructura de tabla para la tabla `estados`
 --
 
 DROP TABLE IF EXISTS `estados`;
@@ -158,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `estados` (
 ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Dumping data for table `estados`
+-- Volcado de datos para la tabla `estados`
 --
 
 INSERT INTO `estados` (`id_estado`, `nombre_estado`) VALUES
@@ -169,7 +187,7 @@ INSERT INTO `estados` (`id_estado`, `nombre_estado`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Estructura de tabla para la tabla `users`
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -181,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Dumping data for table `users`
+-- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`id_user`, `correo_user`, `password_user`) VALUES
