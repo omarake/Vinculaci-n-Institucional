@@ -112,10 +112,10 @@ if (isset($_POST['guardar_depedencia'])) {
                                     <div class="form-group">
                                         <label for="my-select">Tamaño de la empresa</label>
                                         <select id="my-select" class="form-control" name="tamano_dependencia" required>
-                                            <option>Micro</option>
-                                            <option>Pequeña</option>
-                                            <option>Mediana</option>
-                                            <option>Macro</option>
+                                            <option value="1">Micro</option>
+                                            <option value="2">Pequeña</option>
+                                            <option value="3">Mediana</option>
+                                            <option value="4">Grande</option>
                                         </select>
                                     </div>
                                     <div class="form-group">

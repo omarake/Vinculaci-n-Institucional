@@ -129,16 +129,34 @@ if (isset($_GET['delete'])) {
                                     </thead>
                                     <tbody>
                                         <?php
+
                                         $consulta = $DB_con->prepare("SELECT dependencias.*, convenios.* FROM convenios INNER JOIN dependencias ON convenios.dependencia_convenio = dependencias.id_dependencia");
                                         $consulta->execute();
                                         while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
+                                            $contadorUsos = 0;
+                                            // CONTADOR DE USOS
+                                            $consultaUso = $DB_con->prepare("SELECT * FROM convenio_alumno WHERE id_convenio = :id_convenio");
+                                            $consultaUso->execute(array('id_convenio' => $row->id_convenio));
+                                            while ($contador = $consultaUso->fetch(PDO::FETCH_OBJ)) {
+                                                $contadorUsos++;
+                                            }
+
+                                            // CALCULAR ESTATUS POR FECHA
+                                            $fecha_actual = strtotime(date("Y-m-d", time()));
+                                            $fecha_entrada = strtotime($row->fechafinal_convenio);
+                                            if ($fecha_actual <= $fecha_entrada) {
+                                                $status =  '<span class="status--process">Activo</span>';
+                                            } else {
+                                                $status = '<span>Inactivo</span>';
+                                            }
+
                                             echo '<tr class="tr-shadow">
 <td>' . $row->nombre_convenio . '</td>
 <td>' . $row->nombre_indepedencia . '</td>
 <td>' . $row->fechaInicio_convenio . '</td>
 <td>' . $row->fechafinal_convenio . '</td>
-<td><span class="status--process">Activo</span></td>
-<td>' . $row->uso_convenios . '</td>
+<td>'. $status .'</td>
+<td>' .  $contadorUsos . '</td>
 <td>
     <div class="table-data-feature">
     <a href="usar_convenio.php?id=' . $row->id_convenio . '">
@@ -183,7 +201,7 @@ if (isset($_GET['delete'])) {
                 </div>
             </section>
             <section class="p-t-60 p-b-20">
-                <div class="container">   
+                <div class="container">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="copyright">

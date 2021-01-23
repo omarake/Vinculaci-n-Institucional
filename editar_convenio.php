@@ -52,7 +52,7 @@ if (isset($_POST['editar_convenio'])) {
         }
 
         if (!isset($errMSG)) {
-            $statement = $DB_con->prepare('UPDATE convenios SET nombre_convenio=:nombre_convenio ,dependencia_convenio=:dependencia_convenio, fechaInicio_convenio=:fechaInicio_convenio ,fechafinal_convenio=:fechafinal_convenio,documento_convenio=:documento_convenio,concepto=:concepto WHERE id_convenio =:id_convenio');
+            $statement = $DB_con->prepare('UPDATE convenios SET nombre_convenio=:nombre_convenio ,dependencia_convenio=:dependencia_convenio, fechaInicio_convenio=:fechaInicio_convenio ,fechafinal_convenio=:fechafinal_convenio,documento_convenio=:documento_convenio,concepto=:concepto, tipo=:tipo WHERE id_convenio =:id_convenio');
             $statement->execute([
                 'nombre_convenio' => $_POST['nombre_convenio'],
                 'dependencia_convenio' =>  $_POST['dependencia_convenio'],
@@ -60,6 +60,7 @@ if (isset($_POST['editar_convenio'])) {
                 'fechafinal_convenio' =>  $_POST['fechafinal_convenio'],
                 'documento_convenio' =>  $userpic,
                 'concepto' =>  $_POST['concepto'],
+                'tipo' =>  $_POST['tipo'],
                 'id_convenio' =>  $_POST['id_convenio'],
             ]);
             print('<script>alert("Información editada exitosamente");window.location="convenios.php"</script>');
@@ -186,6 +187,7 @@ if (isset($_POST['editar_convenio'])) {
                                                     <input type="date" class="form-control" value="<?php echo $info['fechafinal_convenio'] ?>" name="fechafinal_convenio" required>
                                                 </div>
                                             </div>
+                                            <br>
                                             <div class="form-group">
                                                 <label for="my-select">Concepto</label>
                                                 <select id="my-select" class="form-control" name="concepto">
@@ -199,7 +201,7 @@ if (isset($_POST['editar_convenio'])) {
 <option value="6">Educación Dual</option>
 <option value="7">Investigación</option>
 <option value="8">Proyecto Vinculado con el sector productivo o gubernamental</option>';
-                                                    }elseif($info['concepto'] == 2){
+                                                    } elseif ($info['concepto'] == 2) {
                                                         echo '<option value="1">General</option>
                                                         <option value="2" selected>Residencias</option>
                                                         <option value="3">Servicio Social</option>
@@ -208,7 +210,7 @@ if (isset($_POST['editar_convenio'])) {
                                                         <option value="6">Educación Dual</option>
                                                         <option value="7">Investigación</option>
                                                         <option value="8">Proyecto Vinculado con el sector productivo o gubernamental</option>';
-                                                    }elseif($info['concepto'] == 3){
+                                                    } elseif ($info['concepto'] == 3) {
                                                         echo '<option value="1">General</option>
                                                         <option value="2">Residencias</option>
                                                         <option value="3" selected>Servicio Social</option>
@@ -217,7 +219,7 @@ if (isset($_POST['editar_convenio'])) {
                                                         <option value="6">Educación Dual</option>
                                                         <option value="7">Investigación</option>
                                                         <option value="8">Proyecto Vinculado con el sector productivo o gubernamental</option>';
-                                                    } elseif($info['concepto'] == 4){
+                                                    } elseif ($info['concepto'] == 4) {
                                                         echo '<option value="1">General</option>
                                                         <option value="2">Residencias</option>
                                                         <option value="3">Servicio Social</option>
@@ -226,7 +228,7 @@ if (isset($_POST['editar_convenio'])) {
                                                         <option value="6">Educación Dual</option>
                                                         <option value="7">Investigación</option>
                                                         <option value="8">Proyecto Vinculado con el sector productivo o gubernamental</option>';
-                                                    }elseif($info['concepto'] == 5){
+                                                    } elseif ($info['concepto'] == 5) {
                                                         echo '<option value="1">General</option>
                                                         <option value="2">Residencias</option>
                                                         <option value="3">Servicio Social</option>
@@ -235,7 +237,7 @@ if (isset($_POST['editar_convenio'])) {
                                                         <option value="6">Educación Dual</option>
                                                         <option value="7">Investigación</option>
                                                         <option value="8">Proyecto Vinculado con el sector productivo o gubernamental</option>';
-                                                    }elseif($info['concepto'] == 6){
+                                                    } elseif ($info['concepto'] == 6) {
                                                         echo '<option value="1">General</option>
                                                         <option value="2">Residencias</option>
                                                         <option value="3">Servicio Social</option>
@@ -244,7 +246,7 @@ if (isset($_POST['editar_convenio'])) {
                                                         <option value="6" selected>Educación Dual</option>
                                                         <option value="7">Investigación</option>
                                                         <option value="8">Proyecto Vinculado con el sector productivo o gubernamental</option>';
-                                                    }elseif($info['concepto'] == 7){
+                                                    } elseif ($info['concepto'] == 7) {
                                                         echo '<option value="1">General</option>
                                                         <option value="2">Residencias</option>
                                                         <option value="3">Servicio Social</option>
@@ -253,7 +255,7 @@ if (isset($_POST['editar_convenio'])) {
                                                         <option value="6">Educación Dual</option>
                                                         <option value="7" selected>Investigación</option>
                                                         <option value="8">Proyecto Vinculado con el sector productivo o gubernamental</option>';
-                                                    }elseif($info['concepto'] == 8){
+                                                    } elseif ($info['concepto'] == 8) {
                                                         echo '<option value="1">General</option>
                                                         <option value="2">Residencias</option>
                                                         <option value="3">Servicio Social</option>
@@ -265,6 +267,20 @@ if (isset($_POST['editar_convenio'])) {
                                                     }
                                                     ?>
 
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="my-select">Tipo</label>
+                                                <select id="my-select" class="form-control" name="tipo">
+                                                <?php if ($info['tipo'] == 1) {
+                                                        echo '<option value="1" selected>Convenio solicitado</option>
+                                                        <option value="2">Convenio firmado</option>';
+                                                    }elseif ($info['tipo'] == 2) {
+                                                        echo '<option value="1">Convenio solicitado</option>
+                                                        <option value="2" selected>Convenio firmado</option>';
+                                                    }
+                                                    ?>
+                                                    
                                                 </select>
                                             </div>
                                             <!-- <small id="emailHelp" class="form-text text-muted"></small> -->

@@ -3,7 +3,7 @@ include("mantener_session.php");
 include('Conexion.php');
 
 // ===================
-// EDITAR DEPEDENCIA
+// VER DEPEDENCIA
 // ===================
 if (isset($_GET['id'])) {
     $consulta = $DB_con->prepare("SELECT * FROM convenios WHERE id_convenio  = :id_convenio ");
@@ -14,6 +14,25 @@ if (isset($_GET['id'])) {
     // COMPROBAMOS SI EXITE LA DEPEDENCIA ENVIADO
     if (!isset($info['id_convenio'])) {
         header('location:convenios.php');
+    }
+}
+
+// ===================
+// GUARDAR
+// ===================
+if (isset($_POST['usar_convenio'])) {
+    $stmt = $DB_con->prepare("INSERT INTO convenio_alumno(id_convenio, id_alumno, fecha_inicio, fecha_final, producto, evidencia) VALUES (?,?,?,?,?,?)");
+    $stmt->bindParam(1, $_POST['id_convenio']);
+    $stmt->bindParam(2, $_POST['id_alumno']);
+    $stmt->bindParam(3, $_POST['fecha_inicio']);
+    $stmt->bindParam(4, $_POST['fecha_final']);
+    $stmt->bindParam(5, $_POST['producto']);
+    $stmt->bindParam(6, $_POST['evidencia']);
+    if ($stmt->execute()) {
+        // EXITO
+        print('<script>alert("Se guardo exitosamente");window.location="convenios.php"</script>');
+    } else {
+        $errMSG = "Error al guargar la información";
     }
 }
 ?>
@@ -94,7 +113,8 @@ if (isset($_GET['id'])) {
                             <div class="container">
                                 <div class="row">
                                     <div class="col-6">
-                                        <form action="convenios.php" method="GET">
+                                        <form action="usar_convenio.php" method="POST">
+                                        <input type="hidden" name="id_convenio" value="<?php echo $info['id_convenio']; ?>">
                                             <div class="form-group">
                                                 <label for="exampleFormControlFile1">Alumno</label>
                                                 <br>
@@ -110,18 +130,27 @@ if (isset($_GET['id'])) {
                                             <div class="form-row">
                                                 <div class="col">
                                                     <label for="exampleInputEmail1">Fecha de inicio</label>
-                                                    <input type="date" class="form-control" min="<?php echo $info['fechaInicio_convenio']; ?>" max="<?php echo $info['fechafinal_convenio']; ?>" name="fechaInicio" required>
+                                                    <input type="date" class="form-control" min="<?php echo $info['fechaInicio_convenio']; ?>" max="<?php echo $info['fechafinal_convenio']; ?>" name="fecha_inicio" required>
                                                 </div>
                                                 <div class="col">
                                                     <label for="exampleInputEmail1">Fecha de finalización</label>
-                                                    <input type="date" min="<?php echo $info['fechaInicio_convenio']; ?>" max="<?php echo $info['fechafinal_convenio']; ?>" class="form-control" name="fechaFinal" required>
+                                                    <input type="date" min="<?php echo $info['fechaInicio_convenio']; ?>" max="<?php echo $info['fechafinal_convenio']; ?>" class="form-control" name="fecha_final" required>
                                                 </div>
+                                            </div>
+                                            <br>
+                                            <div class="form-group">
+                                                <label for="producto">Producto del convenio</label>
+                                                <textarea id="producto" class="form-control" name="producto" rows="3" placeholder="Describe el producto del convenio" required></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="producto">Evidencia del convenio</label>
+                                                <textarea id="producto" class="form-control" name="evidencia" rows="3" placeholder="Describe las evidencias del convenio" required></textarea>
                                             </div>
                                             <!-- <small id="emailHelp" class="form-text text-muted"></small> -->
                                             <div class="form-group">
                                                 <br>
                                                 <br>
-                                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                                <button type="submit" name="usar_convenio" class="btn btn-primary">Guardar</button>
                                                 <a href="convenios.php"><button class="btn btn-danger" type="button">Cancelar</button></a>
                                             </div>
                                         </form>

@@ -132,26 +132,26 @@ if (isset($_POST['editar_depedencia'])) {
                                         <label for="my-select">Tamaño de la empresa</label>
                                         <select id="my-select" class="form-control" name="tamano_dependencia" required>
                                             <?php
-                                            if ($info['tamano_dependencia'] == 'Micro') {
+                                            if ($info['tamano_dependencia'] == 1) {
                                                 echo '<option selected>Micro</option>
                                                     <option>Pequeña</option>
                                                     <option>Mediana</option>
-                                                    <option>Macro</option>';
-                                            } elseif ($info['tamano_dependencia'] == 'Pequeña') {
+                                                    <option>Grande</option>';
+                                            } elseif ($info['tamano_dependencia'] == 2) {
                                                 echo '<option>Micro</option>
                                                     <option selected>Pequeña</option>
                                                     <option>Mediana</option>
-                                                    <option>Macro</option>';
-                                            }elseif ($info['tamano_dependencia'] == 'Mediana') {
+                                                    <option>Grande</option>';
+                                            }elseif ($info['tamano_dependencia'] == 3) {
                                                 echo '<option>Micro</option>
                                                 <option>Pequeña</option>
                                                 <option selected>Mediana</option>
-                                                <option>Macro</option>';
-                                            }elseif ($info['tamano_dependencia'] == 'Macro') {
+                                                <option>Grande</option>';
+                                            }elseif ($info['tamano_dependencia'] == 4) {
                                                 echo '<option>Micro</option>
                                                 <option>Pequeña</option>
                                                 <option>Mediana</option>
-                                                <option selected>Macro</option>';
+                                                <option selected>Grande</option>';
                                             }
                                             ?>
                                         </select>
