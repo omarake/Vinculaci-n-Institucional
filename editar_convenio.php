@@ -52,7 +52,7 @@ if (isset($_POST['editar_convenio'])) {
         }
 
         if (!isset($errMSG)) {
-            $statement = $DB_con->prepare('UPDATE convenios SET nombre_convenio=:nombre_convenio ,dependencia_convenio=:dependencia_convenio, fechaInicio_convenio=:fechaInicio_convenio ,fechafinal_convenio=:fechafinal_convenio,documento_convenio=:documento_convenio,concepto=:concepto, tipo=:tipo WHERE id_convenio =:id_convenio');
+            $statement = $DB_con->prepare('UPDATE convenios SET nombre_convenio=:nombre_convenio ,dependencia_convenio=:dependencia_convenio, fechaInicio_convenio=:fechaInicio_convenio ,fechafinal_convenio=:fechafinal_convenio,documento_convenio=:documento_convenio,concepto=:concepto, tipo=:tipo, producto=:producto, evidencia=:evidencia WHERE id_convenio =:id_convenio');
             $statement->execute([
                 'nombre_convenio' => $_POST['nombre_convenio'],
                 'dependencia_convenio' =>  $_POST['dependencia_convenio'],
@@ -61,6 +61,8 @@ if (isset($_POST['editar_convenio'])) {
                 'documento_convenio' =>  $userpic,
                 'concepto' =>  $_POST['concepto'],
                 'tipo' =>  $_POST['tipo'],
+                'producto' =>  $_POST['producto'],
+                'evidencia' =>  $_POST['evidencia'],
                 'id_convenio' =>  $_POST['id_convenio'],
             ]);
             print('<script>alert("Información editada exitosamente");window.location="convenios.php"</script>');
@@ -186,6 +188,15 @@ if (isset($_POST['editar_convenio'])) {
                                                     <label for="f2">Fecha de finalización</label>
                                                     <input type="date" class="form-control" value="<?php echo $info['fechafinal_convenio'] ?>" name="fechafinal_convenio" required>
                                                 </div>
+                                            </div>
+                                            <br>
+                                            <div class="form-group">
+                                                <label for="producto">Producto del convenio</label>
+                                                <textarea id="producto" class="form-control" name="producto" rows="3" placeholder="Describe el producto del convenio" required><?php echo $info['producto'] ?></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="producto">Evidencia del convenio</label>
+                                                <textarea id="producto" class="form-control" name="evidencia" rows="3" placeholder="Describe las evidencias del convenio" required><?php echo $info['evidencia'] ?></textarea>
                                             </div>
                                             <br>
                                             <div class="form-group">

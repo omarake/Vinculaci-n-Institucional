@@ -96,27 +96,22 @@ include("Conexion.php");
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-3">
+                        <div class="col-md-6 col-lg-3" style="cursor: pointer;" data-toggle="modal" data-target="#efectividad">
                             <div class="statistic__item statistic__item--blue">
-                                <a href="index.php">
                                     <!-- <h2 class="number">8</h2> -->
                                     <span class="desc">EFECTIVIDAD DE CONVENIOS</span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
-                                </a>
-
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-3">
+                        <div class="col-md-6 col-lg-3" style="cursor: pointer;" data-toggle="modal" data-target="#bolsa">
                             <div class="statistic__item statistic__item--red">
-                                <a href="index.php">
                                     <!-- <h2 class="number">870 </h2> -->
                                     <span class="desc">CONVENIOS POR BOLSA DE TRABAJO</span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -148,7 +143,7 @@ include("Conexion.php");
                     <b class="text-center">Reporte Trimestral</b>
                     <p>Por favor elija una fecha, para mostrar los últimos 3 meses a partir de la fecha elegida. </p>
                     <br>
-                    <form action="reporte_trimestral.php" method="GET">
+                    <form action="reporte_trimestral.php" target="_blank" method="GET">
                         <input type="date" class="form-control" name="fecha" required>
                         <br>
                         <button type="submit" name="view" class="btn btn-primary">Aceptar</button>
@@ -172,7 +167,55 @@ include("Conexion.php");
                     <b class="text-center">Reporte Semestral</b>
                     <p>Por favor elija una fecha, para mostrar los últimos 6 meses a partir de la fecha elegida. </p>
                     <br>
-                    <form action="reporte_semestral.php" method="GET">
+                    <form action="reporte_semestral.php" target="_blank" method="GET">
+                        <input type="date" class="form-control" name="fecha" required>
+                        <br>
+                        <button type="submit" name="view" class="btn btn-primary">Aceptar</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Efectividad-->
+    <div class="modal fade" id="efectividad" role="dialog">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <b class="text-center">Reporte de efectividad</b>
+                    <p>Por favor elija una fecha, para mostrar los últimos 6 meses a partir de la fecha elegida. </p>
+                    <br>
+                    <form action="reporte_efectividad.php" target="_blank" method="GET">
+                        <input type="date" class="form-control" name="fecha" required>
+                        <br>
+                        <button type="submit" name="view" class="btn btn-primary">Aceptar</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Efectividad-->
+    <div class="modal fade" id="bolsa" role="dialog">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <b class="text-center">Reporte por bolsa de trabajo</b>
+                    <p>Por favor elija una fecha, para mostrar los últimos 3 meses a partir de la fecha elegida. </p>
+                    <br>
+                    <form action="reporte_bolsa_de_trabajo.php" target="_blank" method="GET">
                         <input type="date" class="form-control" name="fecha" required>
                         <br>
                         <button type="submit" name="view" class="btn btn-primary">Aceptar</button>

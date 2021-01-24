@@ -36,8 +36,8 @@ if (isset($_POST['agregar_convenio'])) {
 
         if ($archivo_guardado == true) {
             // GUARDANDO
-            $upUsuario = $DB_con->prepare("INSERT INTO convenios(nombre_convenio, dependencia_convenio, fecha_registro,fechaInicio_convenio, fechafinal_convenio, documento_convenio, concepto, tipo) VALUES (:nombre_convenio, :dependencia_convenio, :fecha_registro, :fechaInicio_convenio, :fechafinal_convenio, :documento_convenio, :concepto, :tipo)");
-            $upUsuario->execute(array(':nombre_convenio' => $_POST['nombre_convenio'], ':dependencia_convenio' => $_POST['dependencia_convenio'], ':fecha_registro' => $fecha_hoy, ':fechaInicio_convenio' => $_POST['fechaInicio_convenio'], ':fechafinal_convenio' => $_POST['fechafinal_convenio'], ':documento_convenio' => $userpic, ':concepto' => $_POST['concepto'], ':tipo' => $_POST['tipo']));
+            $upUsuario = $DB_con->prepare("INSERT INTO convenios(nombre_convenio, dependencia_convenio, fecha_registro,fechaInicio_convenio, fechafinal_convenio, documento_convenio, concepto, tipo, producto, evidencia) VALUES (:nombre_convenio, :dependencia_convenio, :fecha_registro, :fechaInicio_convenio, :fechafinal_convenio, :documento_convenio, :concepto, :tipo, :producto, :evidencia)");
+            $upUsuario->execute(array(':nombre_convenio' => $_POST['nombre_convenio'], ':dependencia_convenio' => $_POST['dependencia_convenio'], ':fecha_registro' => $fecha_hoy, ':fechaInicio_convenio' => $_POST['fechaInicio_convenio'], ':fechafinal_convenio' => $_POST['fechafinal_convenio'], ':documento_convenio' => $userpic, ':concepto' => $_POST['concepto'], ':tipo' => $_POST['tipo'], ':producto' => $_POST['producto'], ':evidencia' => $_POST['evidencia']));
 
             print('<script>alert("Información guardada exitosamente");window.location="convenios.php"</script>');
         }
@@ -147,6 +147,15 @@ if (isset($_POST['agregar_convenio'])) {
                                     </div>
                                     <br>
                                     <div class="form-group">
+                                        <label for="producto">Producto del convenio</label>
+                                        <textarea id="producto" class="form-control" name="producto" rows="3" placeholder="Describe el producto del convenio" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="producto">Evidencia del convenio</label>
+                                        <textarea id="producto" class="form-control" name="evidencia" rows="3" placeholder="Describe las evidencias del convenio" required></textarea>
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
                                         <label for="my-select">Concepto</label>
                                         <select id="my-select" class="form-control" name="concepto">
                                             <option value="1">General</option>
@@ -166,6 +175,7 @@ if (isset($_POST['agregar_convenio'])) {
                                             <option value="2">Convenio firmado</option>
                                         </select>
                                     </div>
+
                                     <!-- <small id="emailHelp" class="form-text text-muted"></small> -->
                                     <div class="form-group">
                                         <br>

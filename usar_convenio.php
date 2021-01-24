@@ -21,13 +21,11 @@ if (isset($_GET['id'])) {
 // GUARDAR
 // ===================
 if (isset($_POST['usar_convenio'])) {
-    $stmt = $DB_con->prepare("INSERT INTO convenio_alumno(id_convenio, id_alumno, fecha_inicio, fecha_final, producto, evidencia) VALUES (?,?,?,?,?,?)");
+    $stmt = $DB_con->prepare("INSERT INTO convenio_alumno(id_convenio, id_alumno, fecha_inicio, fecha_final) VALUES (?,?,?,?)");
     $stmt->bindParam(1, $_POST['id_convenio']);
     $stmt->bindParam(2, $_POST['id_alumno']);
     $stmt->bindParam(3, $_POST['fecha_inicio']);
     $stmt->bindParam(4, $_POST['fecha_final']);
-    $stmt->bindParam(5, $_POST['producto']);
-    $stmt->bindParam(6, $_POST['evidencia']);
     if ($stmt->execute()) {
         // EXITO
         print('<script>alert("Se guardo exitosamente");window.location="convenios.php"</script>');
@@ -137,15 +135,7 @@ if (isset($_POST['usar_convenio'])) {
                                                     <input type="date" min="<?php echo $info['fechaInicio_convenio']; ?>" max="<?php echo $info['fechafinal_convenio']; ?>" class="form-control" name="fecha_final" required>
                                                 </div>
                                             </div>
-                                            <br>
-                                            <div class="form-group">
-                                                <label for="producto">Producto del convenio</label>
-                                                <textarea id="producto" class="form-control" name="producto" rows="3" placeholder="Describe el producto del convenio" required></textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="producto">Evidencia del convenio</label>
-                                                <textarea id="producto" class="form-control" name="evidencia" rows="3" placeholder="Describe las evidencias del convenio" required></textarea>
-                                            </div>
+                                            
                                             <!-- <small id="emailHelp" class="form-text text-muted"></small> -->
                                             <div class="form-group">
                                                 <br>

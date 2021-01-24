@@ -132,7 +132,7 @@ if (isset($_GET['fecha'])) { //BUSCAR CONVENIOS
 
 <head>
     <meta charset="UTF-8">
-    <title>Reporte Trimestral</title>
+    <title>Reporte Semestral</title>
     <link rel="stylesheet" href="assets/css/main.css">
     <style type="text/css" media="print">
         @page {
@@ -263,7 +263,7 @@ if (isset($_GET['fecha'])) { //BUSCAR CONVENIOS
             <th>Responsabilidad Social</th>
             <th>Bolsa de Trabajo</th>
             <th>Educación Dual</th>
-            <th>Proyecto Vinculado con el sector productivo o gubernamentaln</th>
+            <th>Proyecto Vinculado con el sector productivo o gubernamental</th>
         </tr>
         <tr>
             <th><?php echo $general; ?></th>
